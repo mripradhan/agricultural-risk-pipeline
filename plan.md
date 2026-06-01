@@ -14,7 +14,7 @@
 
 ---
 
-## Member 1 — Pradhan (Project Lead)
+## Member 1 — Mrida
 
 ### ✅ Completed
 
@@ -109,7 +109,7 @@ Once Members 2 and 3 push:
 
 ---
 
-## Member 2 — IMD Rainfall + Crop Production → Enriched Dataset + Retrain
+## Member 2 — Gayathri -- IMD Rainfall + Crop Production → Enriched Dataset + Retrain
 
 ### Datasets to download first
 
@@ -254,7 +254,7 @@ Run with: `python enrich_and_retrain.py`
 
 ---
 
-## Member 3 — Fertilizer Data Augmentation + TabNet + Controllability Panel
+## Member 3 — Umar -- Fertilizer Data Augmentation + TabNet + Controllability Panel
 
 ### Dataset to download first
 
