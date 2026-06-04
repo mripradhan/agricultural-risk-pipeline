@@ -1,16 +1,7 @@
 """
-Train XGBRegressor on master_clean enriched with IMD annual rainfall.
-
-Steps:
-  1. Save enriched dataframe → data/processed/master_enriched.csv
-  2. Load feature_cols + TARGET from meta.json, append ANNUAL_RAIN_IMD
-  3. Reproduce original train/test split (test_size=0.20, random_state=42,
-     stratify=state) — no split_indices.json exists, so we replicate the logic
-  4. Fill NaNs with column medians
-  5. Train XGBRegressor (same hyper-params as baseline)
-  6. Evaluate → RMSE, MAE, R²  (compare to baseline in meta.json)
-  7. Save model → outputs/models/xgboost_enriched.pkl
-  8. Update meta.json with enriched_rmse/mae/r2/feature_cols
+Train XGBRegressor on master_enriched.csv (baseline features + ANNUAL_RAIN_IMD
++ Season_enc). Reproduces the original train/test split (test_size=0.20,
+random_state=42, stratify=State Name) — no split_indices.json exists.
 """
 
 import json
@@ -22,63 +13,53 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from xgboost import XGBRegressor
 
-# ── paths ─────────────────────────────────────────────────────────────────────
 DATA    = pathlib.Path("data/processed")
 OUTPUTS = pathlib.Path("outputs/models")
 OUTPUTS.mkdir(parents=True, exist_ok=True)
 
-# ── 1. Build enriched dataframe ───────────────────────────────────────────────
-master  = pd.read_csv(DATA / "master_clean.csv")
-imd_rain = pd.read_csv(DATA / "master_with_imd_rain.csv")[
-    ["Dist Name", "ANNUAL_RAIN_IMD"]
-].drop_duplicates("Dist Name")
+# ── 1. Load enriched data + meta ──────────────────────────────────────────────
+df = pd.read_csv(DATA / "master_enriched.csv")
 
-enriched = master.merge(imd_rain, on="Dist Name", how="left")
-
-out_path = DATA / "master_enriched.csv"
-enriched.to_csv(out_path, index=False)
-print(f"Saved enriched dataframe → {out_path}  ({len(enriched):,} rows)")
-
-# ── 2. Load meta and build feature list ───────────────────────────────────────
 with open(DATA / "meta.json") as f:
     meta = json.load(f)
 
 TARGET       = meta["TARGET"]
-DISTRICT_COL = meta["DISTRICT_COL"]
 STATE_COL    = meta["STATE_COL"]
-feature_cols = list(meta["feature_cols"])          # original list
+feature_cols = list(meta["feature_cols"])
 
-# Append ANNUAL_RAIN_IMD only if it landed in the dataframe
-if "ANNUAL_RAIN_IMD" in enriched.columns:
-    if "ANNUAL_RAIN_IMD" not in feature_cols:
-        feature_cols.append("ANNUAL_RAIN_IMD")
-    print("ANNUAL_RAIN_IMD appended to feature_cols.")
-else:
-    print("WARNING: ANNUAL_RAIN_IMD not found in enriched dataframe — skipping.")
+# ── 2. Append new columns if present ─────────────────────────────────────────
+for col in ["ANNUAL_RAIN_IMD", "Season_enc"]:
+    if col in df.columns and col not in feature_cols:
+        feature_cols.append(col)
+        print(f"Appended to feature_cols: '{col}'")
+    elif col not in df.columns:
+        print(f"WARNING: '{col}' not found in dataframe — skipping.")
 
-# Keep only columns that actually exist
-feature_cols = [c for c in feature_cols if c in enriched.columns]
-print(f"Features: {len(feature_cols)}  (was {len(meta['feature_cols'])} before enrichment)")
-print(f"Target  : {TARGET}")
+# Keep only columns that exist
+feature_cols = [c for c in feature_cols if c in df.columns]
+print(f"Total features: {len(feature_cols)}")
+print(f"Target        : {TARGET}")
 
-# ── 3. Drop rows where target is null, build X / y ───────────────────────────
-df_model = enriched.dropna(subset=[TARGET]).copy()
+# ── 3. Drop rows where target is null ─────────────────────────────────────────
+df_model = df.dropna(subset=[TARGET]).copy()
+print(f"\nModelling rows: {len(df_model):,}  "
+      f"(Season_enc=-1 rows kept: "
+      f"{(df_model['Season_enc'] == -1).sum():,})")
 
 X = df_model[feature_cols].copy()
 y = df_model[TARGET].copy()
 
 # ── 4. Fill NaNs with column medians ─────────────────────────────────────────
-medians = X.median()
-X = X.fillna(medians)
+X = X.fillna(X.median())
 
 # ── 5. Reproduce original split (stratify by state) ───────────────────────────
 strat = df_model[STATE_COL].astype(str)
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.20, random_state=42, stratify=strat
 )
-print(f"\nTrain: {X_train.shape}   Test: {X_test.shape}")
+print(f"Train: {X_train.shape}   Test: {X_test.shape}")
 
-# ── 6. Train XGBRegressor ─────────────────────────────────────────────────────
+# ── 6. Train ──────────────────────────────────────────────────────────────────
 xgb = XGBRegressor(
     n_estimators=500,
     learning_rate=0.05,
@@ -101,18 +82,23 @@ rmse   = float(np.sqrt(mean_squared_error(y_test, y_pred)))
 mae    = float(mean_absolute_error(y_test, y_pred))
 r2     = float(r2_score(y_test, y_pred))
 
-baseline_rmse = meta.get("model_rmse", None)
-baseline_mae  = meta.get("model_mae",  None)
-baseline_r2   = meta.get("model_r2",   None)
+imd_rmse, imd_mae, imd_r2       = 377.35, 261.79, 0.8710
+base_rmse, base_mae, base_r2    = 379.56, 263.69, 0.8695
 
-print("\n=== Evaluation (test set) ===")
-print(f"{'Metric':<8}  {'Enriched':>12}  {'Baseline':>12}  {'Delta':>10}")
-print("-" * 46)
-for label, val, base in [("RMSE", rmse, baseline_rmse),
-                          ("MAE",  mae,  baseline_mae),
-                          ("R²",   r2,   baseline_r2)]:
-    delta = f"{val - base:+.4f}" if base is not None else "n/a"
-    print(f"{label:<8}  {val:>12.4f}  {str(base):>12}  {delta:>10}")
+print("\n" + "─" * 54)
+print(f"{'Metric':<8} │ {'Season+IMD':>12} │ {'IMD Only':>10} │ {'Baseline':>10}")
+print("─" * 54)
+for label, val, imd_val, base_val in [
+    ("RMSE", rmse, imd_rmse, base_rmse),
+    ("MAE",  mae,  imd_mae,  base_mae),
+    ("R²",   r2,   imd_r2,   base_r2),
+]:
+    delta = val - base_val
+    arrow = "▼" if (label in ("RMSE", "MAE") and delta < 0) or \
+                   (label == "R²" and delta > 0) else "▲" if delta != 0 else " "
+    print(f"{label:<8} │ {val:>11.4f} │ {imd_val:>10} │ {base_val:>10}  {arrow}")
+print("─" * 54)
+print("▼ = improvement over baseline")
 
 # ── 8. Save model ─────────────────────────────────────────────────────────────
 model_path = OUTPUTS / "xgboost_enriched.pkl"
@@ -128,5 +114,5 @@ meta["enriched_feature_cols"] = feature_cols
 
 with open(DATA / "meta.json", "w") as f:
     json.dump(meta, f, indent=2)
-print(f"meta.json updated with enriched_rmse={rmse:.4f}, "
+print(f"meta.json updated  →  enriched_rmse={rmse:.4f}, "
       f"enriched_mae={mae:.4f}, enriched_r2={r2:.4f}")

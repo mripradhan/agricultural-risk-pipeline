@@ -112,9 +112,9 @@
   "model_rmse": 379.56,
   "model_mae": 263.69,
   "model_r2": 0.8695,
-  "enriched_rmse": 377.3515,
-  "enriched_mae": 261.7864,
-  "enriched_r2": 0.871,
+  "enriched_rmse": 373.3168,
+  "enriched_mae": 257.8708,
+  "enriched_r2": 0.8737,
   "enriched_feature_cols": [
     "JANUARY MAXIMUM TEMPERATURE (Centigrate)",
     "FEBRUARY MAXIMUM TEMPERATURE (Centigrate)",
@@ -206,6 +206,7 @@
     "Dist Name_enc",
     "State Name_enc",
     "Year",
-    "ANNUAL_RAIN_IMD"
+    "ANNUAL_RAIN_IMD",
+    "Season_enc"
   ]
 }
