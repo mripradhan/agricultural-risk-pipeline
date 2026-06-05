@@ -112,9 +112,9 @@
   "model_rmse": 379.56,
   "model_mae": 263.69,
   "model_r2": 0.8695,
-  "enriched_rmse": 373.3168,
-  "enriched_mae": 257.8708,
-  "enriched_r2": 0.8737,
+  "enriched_rmse": 373.1367,
+  "enriched_mae": 258.9945,
+  "enriched_r2": 0.8739,
   "enriched_feature_cols": [
     "JANUARY MAXIMUM TEMPERATURE (Centigrate)",
     "FEBRUARY MAXIMUM TEMPERATURE (Centigrate)",
