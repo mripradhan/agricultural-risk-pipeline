@@ -109,12 +109,12 @@
     "GROUNDNUT YIELD (Kg per ha)",
     "SUGARCANE YIELD (Kg per ha)"
   ],
-  "model_rmse": 379.56,
-  "model_mae": 263.69,
-  "model_r2": 0.8695,
-  "enriched_rmse": 373.1367,
-  "enriched_mae": 258.9945,
-  "enriched_r2": 0.8739,
+  "model_rmse": 376.85,
+  "model_mae": 263.24,
+  "model_r2": 0.8709,
+  "enriched_rmse": 371.7356,
+  "enriched_mae": 259.9735,
+  "enriched_r2": 0.8744,
   "enriched_feature_cols": [
     "JANUARY MAXIMUM TEMPERATURE (Centigrate)",
     "FEBRUARY MAXIMUM TEMPERATURE (Centigrate)",
@@ -208,5 +208,8 @@
     "Year",
     "ANNUAL_RAIN_IMD",
     "Season_enc"
-  ]
+  ],
+  "tabnet_rmse": 1975.76,
+  "tabnet_mae": 1658.96,
+  "tabnet_r2": -2.5482
 }
