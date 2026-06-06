@@ -4,309 +4,996 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>XAI-Crop — District Yield Explainability</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <style>
-  :root {
-    --green-primary: #14532d;
-    --green-mid:     #166534;
-    --green-light:   #dcfce7;
-    --amber:         #d97706;
-    --amber-light:   #fef3c7;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: #f0fdf4; display: flex; height: 100vh; overflow: hidden; }
+/* ═══════════════════════════════════════════════════════
+   TOKENS
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --bg:           #f9f6f0;
+  --bg-alt:       #f2ede4;
+  --bg-deep:      #111a11;
+  --bg-deep-mid:  #182018;
+  --text:         #1c1c1c;
+  --text-mid:     #3a3a3a;
+  --text-muted:   #7a7a6e;
+  --text-faint:   #a8a89a;
+  --accent:       #c8922a;
+  --accent-dim:   rgba(200,146,42,0.13);
+  --rule:         #d6d0c4;
+  --rule-faint:   #eae5dc;
+  --card-bg:      #ffffff;
+  --serif:        'Playfair Display', Georgia, serif;
+  --sans:         'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+  --sb-fg:        #e8e0d0;
+  --sb-muted:     rgba(232,224,208,0.45);
+  --sb-faint:     rgba(255,255,255,0.10);
+  --sb-rule:      rgba(255,255,255,0.12);
+}
 
-  /* ── Sidebar ── */
+/* ═══════════════════════════════════════════════════════
+   RESET
+   ═══════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  overflow: hidden;
+  height: 100vh;
+}
+button { cursor: pointer; font-family: inherit; }
+select { font-family: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-alt); }
+::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════
+   LOADER
+   ═══════════════════════════════════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px;
+}
+.loader-ring {
+  width: 36px; height: 36px;
+  border: 2px solid var(--rule);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-text {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════
+   LANDING
+   ═══════════════════════════════════════════════════════ */
+#landing {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: stretch;
+  background: var(--bg);
+  transition: opacity 0.35s ease;
+}
+#landing.out {
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-left {
+  flex: 0 0 60%;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 72px 80px 96px;
+  border-right: 1px solid var(--rule);
+}
+.hero-right {
+  flex: 0 0 40%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-alt);
+  padding: 60px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-overline {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+.hero-body {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 500px;
+  margin-bottom: 36px;
+}
+.hero-rule {
+  width: 72px; height: 1px;
+  background: var(--accent);
+  margin-bottom: 32px;
+}
+.hero-begin {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: none; background: none;
+  padding: 0;
+  transition: gap 0.2s;
+  position: relative;
+}
+.hero-begin::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 1px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.hero-begin:hover::after { transform: scaleX(1); }
+.hero-begin:hover { gap: 14px; }
+
+/* hero SVG illustration */
+.hero-illustration { width: 100%; max-width: 340px; }
+
+/* ═══════════════════════════════════════════════════════
+   APP SHELL
+   ═══════════════════════════════════════════════════════ */
+#app {
+  display: flex;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.05s;
+}
+#app.visible { opacity: 1; }
+
+/* ── Sidebar ── */
+#sidebar {
+  width: 240px; min-width: 240px;
+  background: var(--bg-deep);
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+  border-top: 3px solid var(--accent);
+  position: relative; z-index: 10;
+}
+.sb-inner { padding: 24px 22px; flex: 1; display: flex; flex-direction: column; }
+
+.sb-masthead { margin-bottom: 28px; }
+.sb-overline {
+  font-family: var(--sans);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.sb-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--sb-fg);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+.sb-subtitle {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-style: italic;
+  color: var(--sb-muted);
+  margin-top: 4px;
+}
+
+.sb-divider {
+  height: 1px;
+  background: var(--sb-rule);
+  margin: 20px 0;
+}
+
+.sb-field { margin-bottom: 20px; }
+.sb-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sb-muted);
+  margin-bottom: 7px;
+}
+.sb-select-wrap { position: relative; }
+.sb-select-wrap::after {
+  content: '▾';
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%);
+  color: var(--sb-muted);
+  font-size: 0.7rem;
+  pointer-events: none;
+}
+.sb-select-wrap select {
+  width: 100%;
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--sb-faint);
+  color: var(--sb-fg);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  padding: 5px 18px 5px 0;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.sb-select-wrap select:focus { border-bottom-color: var(--accent); }
+.sb-select-wrap select option { background: #182018; color: var(--sb-fg); }
+
+.sb-metrics-heading {
+  font-family: var(--sans);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sb-muted);
+  margin-bottom: 12px;
+}
+.sb-metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 4px;
+}
+.sb-metrics-table td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--sb-rule);
+  font-size: 0.73rem;
+}
+.sb-metrics-table tr:last-child td { border-bottom: none; }
+.sb-met-lbl { color: var(--sb-muted); font-family: var(--sans); }
+.sb-met-val {
+  text-align: right;
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  color: var(--sb-fg);
+}
+.sb-met-val.accent { color: var(--accent); }
+.sb-district-row {
+  display: flex; justify-content: space-between;
+  align-items: baseline;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--sb-rule);
+}
+.sb-district-row:last-child { border-bottom: none; }
+.sb-dr-lbl { font-size: 0.62rem; color: var(--sb-muted); font-family: var(--sans); }
+.sb-dr-val { font-family: var(--serif); font-size: 0.85rem; color: var(--sb-fg); }
+.sb-dr-val.amber { color: var(--accent); }
+
+.sb-footer {
+  padding: 14px 22px;
+  border-top: 1px solid var(--sb-rule);
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-style: italic;
+  color: var(--text-faint);
+  line-height: 1.7;
+}
+
+/* ── Main area ── */
+#main {
+  flex: 1;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ── Top nav ── */
+#topnav {
+  flex-shrink: 0;
+  background: var(--bg-deep);
+  display: flex; align-items: stretch;
+  height: 48px;
+  padding: 0 28px;
+  gap: 0;
+}
+.nav-brand {
+  display: flex; align-items: center;
+  font-family: var(--serif);
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--sb-fg);
+  letter-spacing: 0.04em;
+  margin-right: 36px;
+  white-space: nowrap;
+}
+.nav-brand span { color: var(--accent); margin: 0 6px; font-style: normal; }
+.nav-tabs { display: flex; align-items: stretch; }
+.tab-btn {
+  display: flex; align-items: center;
+  background: none; border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0 20px;
+  font-family: var(--sans);
+  font-size: 0.73rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(232,224,208,0.45);
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--sb-fg); }
+.tab-btn.active {
+  color: #f0ebe0;
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+/* ── Stat bar ── */
+#stat-bar {
+  flex-shrink: 0;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--rule-faint);
+  display: flex; gap: 0;
+  padding: 0;
+}
+.stat-card {
+  flex: 1;
+  padding: 14px 20px 12px;
+  border-top: 3px solid var(--accent);
+  border-right: 1px solid var(--rule-faint);
+}
+.stat-card:last-child { border-right: none; }
+.stat-val {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-lbl {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.stat-sub {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-style: italic;
+  color: var(--text-faint);
+  margin-top: 2px;
+}
+
+/* ── Content area ── */
+#content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 32px 48px;
+  background: var(--bg);
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* ── Section headers ── */
+.section-head {
+  display: flex; align-items: baseline; gap: 10px;
+  margin: 28px 0 16px;
+}
+.section-head:first-child { margin-top: 0; }
+.section-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text);
+}
+.section-rule {
+  flex: 1; height: 1px;
+  background: var(--rule-faint);
+  margin-left: 8px;
+}
+.district-tag {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 2px 10px;
+  border: 1px solid rgba(200,146,42,0.25);
+}
+
+/* ── Chart containers ── */
+.chart-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--rule-faint);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 8px 8px 4px;
+  margin-bottom: 16px;
+}
+.chart-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
+}
+
+/* ── Figure grid ── */
+.fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .fig-grid { grid-template-columns: 1fr; } }
+.fig-card {
+  background: var(--card-bg);
+  border: 1px solid var(--rule-faint);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.fig-card img { width: 100%; display: block; }
+.fig-caption { padding: 12px 14px 10px; }
+.fig-label {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+.fig-toggle {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: none; border: none; padding: 0;
+  transition: color 0.15s;
+}
+.fig-toggle:hover { color: var(--accent); }
+.fig-body {
+  display: none;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-top: 10px;
+  padding: 12px 14px;
+  background: var(--bg-alt);
+  border-left: 2px solid var(--accent);
+}
+.fig-body.open { display: block; }
+
+/* ── Metric row (maps) ── */
+.metric-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
+.metric-card {
+  background: var(--card-bg);
+  border: 1px solid var(--rule-faint);
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 14px 16px 12px;
+}
+.mc-val {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.mc-lbl {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.mc-sub {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-style: italic;
+  color: var(--text-faint);
+  margin-top: 2px;
+}
+
+/* ── Map frame ── */
+.map-frame {
+  width: 100%; height: 560px;
+  border: 1px solid var(--rule-faint);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  display: block;
+  margin-bottom: 32px;
+}
+
+/* ── Model comparison ── */
+.model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.model-card {
+  background: var(--card-bg);
+  border: 1px solid var(--rule-faint);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 20px 22px;
+}
+.model-card-title {
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-faint);
+}
+.model-stat {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--rule-faint);
+}
+.model-stat:last-child { border-bottom: none; }
+.s-label { font-family: var(--sans); font-size: 0.73rem; color: var(--text-muted); }
+.s-val   { font-family: var(--serif); font-size: 1rem; color: var(--text); }
+.s-val.accent { color: var(--accent); }
+
+/* ── Info/alert panels ── */
+.panel {
+  padding: 14px 18px;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+  border-left: 2px solid var(--rule);
+  background: var(--bg-alt);
+}
+.panel.info   { border-left-color: #5c7fa6; background: #f2f5f8; }
+.panel.amber  { border-left-color: var(--accent); background: #faf5ec; }
+.panel.subtle { border-left-color: var(--rule); }
+
+/* ── Card (breakdown) ── */
+.data-card {
+  background: var(--card-bg);
+  border: 1px solid var(--rule-faint);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.data-card-head {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule-faint);
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.data-card-body { padding: 0; overflow-x: auto; }
+
+/* ── Breakdown table ── */
+#breakdown-table {
+  width: 100%; border-collapse: collapse;
+  font-family: var(--sans); font-size: 0.78rem;
+}
+#breakdown-table th {
+  text-align: left; padding: 9px 14px;
+  font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--rule-faint);
+  background: var(--bg-alt);
+}
+#breakdown-table td { padding: 8px 14px; border-bottom: 1px solid var(--rule-faint); }
+#breakdown-table tr:last-child td { border-bottom: none; }
+.badge {
+  display: inline-block; padding: 2px 8px;
+  font-family: var(--sans); font-size: 0.62rem;
+  font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+.badge-ctrl   { color: #3a6b3a; background: #eef5ee; }
+.badge-unctrl { color: #7a3a3a; background: #f8eeee; }
+.badge-struct { color: var(--text-muted); background: var(--bg-alt); }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
   #sidebar {
-    width: 272px; min-width: 272px; background: var(--green-primary);
-    color: #fff; display: flex; flex-direction: column; overflow-y: auto; z-index: 20;
+    width: 100%; min-width: unset;
+    height: auto; flex-direction: row;
+    overflow-y: visible; overflow-x: auto;
+    border-top: 3px solid var(--accent);
+    flex-shrink: 0;
   }
-  #sidebar h1 { font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
-  #sidebar p  { font-size: 0.72rem; color: #86efac; margin-top: 2px; }
-  .sb-label   { font-size: 0.7rem; font-weight: 600; letter-spacing: .06em; color: #86efac; text-transform: uppercase; margin-bottom: 4px; }
-  .sb-select  { width: 100%; background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; padding: 7px 10px; font-size: 0.82rem; cursor: pointer; appearance: none; }
-  .sb-select option { background: var(--green-primary); }
-  .sb-select:focus { outline: 2px solid #4ade80; }
-  .metric-chip { background: rgba(255,255,255,.1); border-radius: 8px; padding: 8px 12px; }
-  .metric-chip .val { font-size: 1.15rem; font-weight: 700; color: #4ade80; }
-  .metric-chip .lbl { font-size: 0.68rem; color: #86efac; }
-
-  /* ── Main ── */
-  #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-  #topbar { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 14px 28px; flex-shrink: 0; }
-  #topbar h2 { font-size: 1.25rem; font-weight: 700; color: #14532d; margin: 0; }
-  #topbar p  { font-size: 0.78rem; color: #6b7280; margin: 2px 0 0; }
-
-  /* ── Tabs ── */
-  #tabbar { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 28px; display: flex; gap: 4px; flex-shrink: 0; }
-  .tab-btn { padding: 12px 20px; font-size: 0.85rem; font-weight: 500; color: #6b7280; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s; }
-  .tab-btn:hover { color: #14532d; }
-  .tab-btn.active { color: #14532d; border-bottom-color: #16a34a; font-weight: 600; }
-
-  /* ── Content ── */
-  #content { flex: 1; overflow-y: auto; padding: 24px 28px; }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  /* ── Cards ── */
-  .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.07); padding: 20px; }
-  .card-title { font-size: 0.9rem; font-weight: 600; color: #374151; margin: 0 0 14px; }
-  .section-title { font-size: 1rem; font-weight: 700; color: #14532d; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
-
-  /* ── Metric row ── */
-  .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-  .metric-card { background: #fff; border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
-  .metric-card .val { font-size: 1.4rem; font-weight: 700; color: #14532d; line-height: 1; }
-  .metric-card .lbl { font-size: 0.72rem; color: #6b7280; margin-top: 4px; }
-  .metric-card .sub { font-size: 0.7rem; color: #9ca3af; margin-top: 2px; }
-
-  /* ── Figure grid ── */
-  .fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 900px) { .fig-grid { grid-template-columns: 1fr; } }
-  .fig-card { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.07); overflow: hidden; }
-  .fig-card img { width: 100%; display: block; }
-  .fig-caption { padding: 10px 14px; }
-  .fig-caption .fig-label { font-size: 0.8rem; font-weight: 600; color: #374151; }
-  .collapsible-toggle { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #16a34a; cursor: pointer; margin-top: 6px; user-select: none; background: none; border: none; padding: 0; }
-  .collapsible-toggle:hover { color: #14532d; }
-  .collapsible-body { display: none; font-size: 0.78rem; color: #4b5563; line-height: 1.55; margin-top: 8px; padding: 10px 12px; background: #f0fdf4; border-radius: 6px; border-left: 3px solid #86efac; }
-  .collapsible-body.open { display: block; }
-
-  /* ── Chart containers ── */
-  .chart-wrap { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.07); padding: 8px; margin-bottom: 16px; }
-
-  /* ── Alert boxes ── */
-  .alert-green { background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 14px 16px; font-size: 0.82rem; color: #14532d; line-height: 1.55; }
-  .alert-amber { background: var(--amber-light); border: 1px solid #fcd34d; border-radius: 8px; padding: 14px 16px; font-size: 0.82rem; color: #92400e; line-height: 1.55; }
-  .alert-blue  { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 14px 16px; font-size: 0.82rem; color: #1e40af; line-height: 1.55; }
-
-  /* ── Model comparison ── */
-  .model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-  .model-card { background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
-  .model-card h3 { font-size: 0.85rem; font-weight: 700; color: #374151; margin: 0 0 12px; }
-  .model-stat { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f3f4f6; }
-  .model-stat:last-child { border-bottom: none; }
-  .model-stat .s-label { font-size: 0.75rem; color: #6b7280; }
-  .model-stat .s-val   { font-size: 0.9rem; font-weight: 700; color: #14532d; }
-
-  /* ── Breakdown table ── */
-  #breakdown-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-  #breakdown-table th { text-align: left; padding: 8px 12px; font-size: 0.72rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .04em; border-bottom: 2px solid #e5e7eb; background: #f9fafb; }
-  #breakdown-table td { padding: 7px 12px; border-bottom: 1px solid #f3f4f6; }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 0.68rem; font-weight: 600; }
-  .badge-ctrl   { background: #dcfce7; color: #166534; }
-  .badge-unctrl { background: #fee2e2; color: #991b1b; }
-  .badge-struct { background: #f3f4f6; color: #4b5563; }
-
-  /* ── Loading ── */
-  #loader { position: fixed; inset: 0; background: #f0fdf4; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; }
-  .spinner { width: 40px; height: 40px; border: 4px solid #bbf7d0; border-top-color: #16a34a; border-radius: 50%; animation: spin .8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ── iframe maps ── */
-  .map-frame { width: 100%; height: 560px; border: none; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.07); display: block; }
-
-  /* ── Tag ── */
-  .tag { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 0.68rem; font-weight: 600; background: #dcfce7; color: #14532d; }
+  #app { flex-direction: column; }
+  .sb-inner { flex-direction: row; flex-wrap: wrap; gap: 16px; padding: 12px 16px; }
+  .sb-masthead, .sb-field, .sb-divider, .sb-footer { margin: 0; }
+  .sb-footer { display: none; }
+  #topnav { padding: 0 16px; }
+  #content { padding: 20px 16px; }
+  .chart-grid { grid-template-columns: 1fr; }
+  .hero-left { padding: 48px 40px; }
+  .hero-headline { font-size: 2rem; }
+  .hero-right { display: none; }
+}
 </style>
 </head>
 <body>
 
-<!-- Loading screen -->
+<!-- ════════════════════════════════════════════════════
+     LOADER
+     ════════════════════════════════════════════════════ -->
 <div id="loader">
-  <div class="spinner"></div>
-  <p style="margin-top:16px;color:#16a34a;font-size:.9rem;font-weight:600;">Loading dashboard data…</p>
+  <div class="loader-ring"></div>
+  <div class="loader-text">Loading observatory data</div>
 </div>
 
-<!-- ═══ SIDEBAR ═══════════════════════════════════════════════════════════ -->
-<aside id="sidebar">
-  <div style="padding:20px 18px 12px;">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
-      <span style="font-size:1.6rem;">🌾</span>
-      <div>
-        <h1>XAI-Crop</h1>
-        <p>District Yield Explainability</p>
-      </div>
-    </div>
+<!-- ════════════════════════════════════════════════════
+     LANDING
+     ════════════════════════════════════════════════════ -->
+<section id="landing">
+  <div class="hero-left">
+    <div class="hero-overline">ICRISAT · IMD · 560 Districts · 1990–2015</div>
+    <h1 class="hero-headline">District-Level<br>Crop Yield<br>Intelligence</h1>
+    <p class="hero-body">
+      An explainability observatory for rice yield across 560 Indian districts.
+      Integrates ICRISAT agronomy data, IMD rainfall records, and district-level
+      fertilizer consumption to train a gradient-boosted model — then applies SHAP
+      attribution to decompose each prediction into controllable and uncontrollable
+      policy levers.
+    </p>
+    <div class="hero-rule"></div>
+    <button class="hero-begin" onclick="beginAnalysis()">
+      Begin Analysis &nbsp; ▸
+    </button>
   </div>
 
-  <div style="padding:0 18px;flex:1;">
-    <!-- State -->
-    <div style="margin-bottom:14px;">
-      <div class="sb-label">State</div>
-      <select id="state-select" class="sb-select"></select>
-    </div>
-    <!-- District -->
-    <div style="margin-bottom:14px;">
-      <div class="sb-label">District</div>
-      <select id="district-select" class="sb-select"></select>
-    </div>
-    <!-- Crop -->
-    <div style="margin-bottom:20px;">
-      <div class="sb-label">Crop (trend chart)</div>
-      <select id="crop-select" class="sb-select"></select>
-    </div>
-
-    <div style="height:1px;background:rgba(255,255,255,.15);margin-bottom:16px;"></div>
-
-    <!-- Model metrics -->
-    <div class="sb-label" style="margin-bottom:8px;">XGBoost Model</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-      <div class="metric-chip"><div class="val" id="sb-r2">—</div><div class="lbl">R²</div></div>
-      <div class="metric-chip"><div class="val" id="sb-rmse">—</div><div class="lbl">RMSE</div></div>
-    </div>
-    <div class="metric-chip" style="margin-bottom:16px;">
-      <div style="font-size:.68rem;color:#86efac;margin-bottom:2px;">Selected district · latest test year</div>
-      <div style="display:flex;gap:16px;margin-top:4px;">
-        <div><div class="val" id="sb-actual" style="font-size:.95rem;">—</div><div class="lbl">Actual</div></div>
-        <div><div class="val" id="sb-pred"   style="font-size:.95rem;color:#fbbf24;">—</div><div class="lbl">Predicted</div></div>
-      </div>
-    </div>
-
-    <div style="height:1px;background:rgba(255,255,255,.15);margin-bottom:16px;"></div>
-    <div class="sb-label" style="margin-bottom:8px;">Enriched Model (IMD+Season)</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:20px;">
-      <div class="metric-chip"><div class="val" id="sb-er2" style="font-size:.9rem;">—</div><div class="lbl">R²</div></div>
-      <div class="metric-chip"><div class="val" id="sb-ermse" style="font-size:.9rem;">—</div><div class="lbl">RMSE</div></div>
-      <div class="metric-chip"><div class="val" id="sb-emae" style="font-size:.9rem;">—</div><div class="lbl">MAE</div></div>
-    </div>
+  <div class="hero-right">
+    <svg class="hero-illustration" viewBox="0 0 380 460"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="dot-grid" x="0" y="0" width="24" height="24"
+                 patternUnits="userSpaceOnUse">
+          <circle cx="12" cy="12" r="1.3" fill="#c8922a" opacity="0.2"/>
+        </pattern>
+      </defs>
+      <!-- dot field -->
+      <rect width="380" height="460" fill="url(#dot-grid)"/>
+      <!-- concentric rings -->
+      <circle cx="190" cy="230" r="155" fill="none" stroke="#1c1c1c"
+              stroke-width="0.5" opacity="0.08"/>
+      <circle cx="190" cy="230" r="115" fill="none" stroke="#1c1c1c"
+              stroke-width="0.5" opacity="0.12"/>
+      <circle cx="190" cy="230" r="76"  fill="none" stroke="#1c1c1c"
+              stroke-width="0.7" opacity="0.16"/>
+      <circle cx="190" cy="230" r="38"  fill="none" stroke="#c8922a"
+              stroke-width="1"   opacity="0.45"/>
+      <circle cx="190" cy="230" r="4"   fill="#c8922a" opacity="0.6"/>
+      <!-- cross hairs -->
+      <line x1="190" y1="60"  x2="190" y2="400" stroke="#1c1c1c"
+            stroke-width="0.4" opacity="0.1" stroke-dasharray="5 8"/>
+      <line x1="30"  y1="230" x2="350" y2="230" stroke="#1c1c1c"
+            stroke-width="0.4" opacity="0.1" stroke-dasharray="5 8"/>
+      <!-- data-point cluster -->
+      <circle cx="136" cy="162" r="5"   fill="#1c1c1c" opacity="0.2"/>
+      <circle cx="228" cy="148" r="7"   fill="#c8922a" opacity="0.45"/>
+      <circle cx="255" cy="278" r="4.5" fill="#1c1c1c" opacity="0.2"/>
+      <circle cx="145" cy="295" r="6"   fill="#c8922a" opacity="0.4"/>
+      <circle cx="200" cy="170" r="3"   fill="#1c1c1c" opacity="0.18"/>
+      <circle cx="162" cy="248" r="3.5" fill="#1c1c1c" opacity="0.18"/>
+      <circle cx="218" cy="306" r="3"   fill="#c8922a" opacity="0.3"/>
+      <circle cx="118" cy="210" r="4"   fill="#1c1c1c" opacity="0.15"/>
+      <!-- label -->
+      <text x="190" y="432" font-family="'Playfair Display',serif"
+            font-size="12" fill="#a8a89a" text-anchor="middle"
+            font-style="italic">district yield observatory</text>
+      <line x1="130" y1="442" x2="250" y2="442" stroke="#d6d0c4"
+            stroke-width="0.7"/>
+    </svg>
   </div>
+</section>
 
-  <div style="padding:12px 18px;font-size:.65rem;color:#4ade80;border-top:1px solid rgba(255,255,255,.1);">
-    560 districts · 1990–2015 · ICRISAT + IMD + Fertilizer
-  </div>
-</aside>
+<!-- ════════════════════════════════════════════════════
+     APP SHELL
+     ════════════════════════════════════════════════════ -->
+<div id="app" style="display:none;">
 
-<!-- ═══ MAIN ══════════════════════════════════════════════════════════════ -->
-<div id="main">
-  <!-- Top bar -->
-  <div id="topbar">
-    <h2>🌾 XAI-Crop: District-Level Yield Explainability Dashboard</h2>
-    <p>560 Indian districts &nbsp;·&nbsp; 1990–2015 &nbsp;·&nbsp; Multi-source fusion &nbsp;·&nbsp; XGBoost + TabNet + SHAP &nbsp;·&nbsp; Policy-actionable insights</p>
-  </div>
-
-  <!-- Tab bar -->
-  <div id="tabbar">
-    <button class="tab-btn active" onclick="switchTab('eda')"  id="btn-eda">📊 EDA</button>
-    <button class="tab-btn"        onclick="switchTab('maps')" id="btn-maps">🗺 Maps</button>
-    <button class="tab-btn"        onclick="switchTab('shap')" id="btn-shap">🔍 SHAP</button>
-  </div>
-
-  <!-- Content -->
-  <div id="content">
-
-    <!-- ══ TAB: EDA ══════════════════════════════════════════════════════ -->
-    <div id="tab-eda" class="tab-panel active">
-
-      <!-- Live charts -->
-      <div class="section-title">
-        <span>District Deep-Dive</span>
-        <span id="eda-district-label" class="tag">—</span>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
-        <div class="chart-wrap"><div id="chart-hist" style="height:280px;"></div></div>
-        <div class="chart-wrap"><div id="chart-trend" style="height:280px;"></div></div>
+  <!-- ── Sidebar ── -->
+  <aside id="sidebar">
+    <div class="sb-inner">
+      <div class="sb-masthead">
+        <div class="sb-overline">Yield Observatory</div>
+        <div class="sb-title">XAI · Crop</div>
+        <div class="sb-subtitle">District Intelligence</div>
       </div>
 
-      <!-- Pre-computed EDA figures -->
-      <div class="section-title">Pre-computed EDA Figures</div>
-      <div class="fig-grid" id="eda-fig-grid"></div>
-    </div>
+      <div class="sb-divider"></div>
 
-    <!-- ══ TAB: MAPS ═════════════════════════════════════════════════════ -->
-    <div id="tab-maps" class="tab-panel">
-      <div class="section-title">Average Rice Yield per District (1990–2015)</div>
-      <div class="metric-row" id="yield-metrics"></div>
-      <iframe class="map-frame" id="map-yield" src="maps/choropleth_yield.html"></iframe>
-
-      <div class="section-title" style="margin-top:28px;">Rice Yield Trend per District (OLS slope, Kg/ha/yr)</div>
-      <div class="metric-row" id="trend-metrics"></div>
-      <iframe class="map-frame" id="map-trend" src="maps/choropleth_trend.html"></iframe>
-    </div>
-
-    <!-- ══ TAB: SHAP ══════════════════════════════════════════════════════ -->
-    <div id="tab-shap" class="tab-panel">
-
-      <!-- Model comparison -->
-      <div class="section-title">Model Comparison: XGBoost vs TabNet</div>
-      <div class="model-grid">
-        <div class="model-card">
-          <h3>⚡ XGBoost</h3>
-          <div class="model-stat"><span class="s-label">RMSE</span><span class="s-val" id="xgb-rmse">—</span></div>
-          <div class="model-stat"><span class="s-label">MAE</span> <span class="s-val" id="xgb-mae">—</span></div>
-          <div class="model-stat"><span class="s-label">R²</span>  <span class="s-val" id="xgb-r2">—</span></div>
-        </div>
-        <div class="model-card">
-          <h3>🧠 TabNet</h3>
-          <div class="model-stat"><span class="s-label">RMSE</span>            <span class="s-val" id="tn-rmse">—</span></div>
-          <div class="model-stat"><span class="s-label">MAE</span>             <span class="s-val" id="tn-mae">—</span></div>
-          <div class="model-stat"><span class="s-label">R²</span>              <span class="s-val" id="tn-r2">—</span></div>
-          <div class="model-stat"><span class="s-label">Train time</span>      <span class="s-val" id="tn-time">—</span></div>
+      <div class="sb-field">
+        <label class="sb-label" for="state-select">State</label>
+        <div class="sb-select-wrap">
+          <select id="state-select"></select>
         </div>
       </div>
-      <div class="alert-blue" style="margin-bottom:24px;">
-        XGBoost outperforms TabNet on this dataset for three reasons:
-        (1) ~23 samples per district is too few for TabNet's attention heads to converge meaningfully;
-        (2) agricultural features have threshold-style interactions that decision-tree splits capture natively;
-        (3) the high feature-to-row ratio makes deep networks prone to overfitting on small-N tabular data.
-      </div>
 
-      <!-- Global SHAP figures -->
-      <div class="section-title">Global SHAP Explainability</div>
-      <div class="fig-grid" id="shap-fig-grid"></div>
-
-      <!-- Live waterfall -->
-      <div class="section-title" style="margin-top:28px;">
-        Live SHAP Waterfall
-        <span id="shap-district-label" class="tag">—</span>
-      </div>
-
-      <div id="ctrl-summary" class="alert-green" style="margin-bottom:14px;"></div>
-
-      <div class="chart-wrap" style="margin-bottom:16px;">
-        <div id="chart-shap" style="height:520px;"></div>
-      </div>
-
-      <div id="policy-lever" class="alert-amber" style="margin-bottom:16px;display:none;"></div>
-
-      <div class="card">
-        <div class="card-title">Feature Breakdown (top 15 by |SHAP|)</div>
-        <div style="overflow-x:auto;">
-          <table id="breakdown-table">
-            <thead>
-              <tr>
-                <th>Feature</th>
-                <th>SHAP Impact (Kg/ha)</th>
-                <th>Category</th>
-              </tr>
-            </thead>
-            <tbody id="breakdown-tbody"></tbody>
-          </table>
+      <div class="sb-field">
+        <label class="sb-label" for="district-select">District</label>
+        <div class="sb-select-wrap">
+          <select id="district-select"></select>
         </div>
       </div>
-    </div><!-- /tab-shap -->
 
-  </div><!-- /content -->
-</div><!-- /main -->
+      <div class="sb-field">
+        <label class="sb-label" for="crop-select">Crop</label>
+        <div class="sb-select-wrap">
+          <select id="crop-select"></select>
+        </div>
+      </div>
+
+      <div class="sb-divider"></div>
+
+      <div class="sb-metrics-heading">XGBoost Model</div>
+      <table class="sb-metrics-table">
+        <tr>
+          <td class="sb-met-lbl">R²</td>
+          <td class="sb-met-val accent" id="sb-r2">—</td>
+        </tr>
+        <tr>
+          <td class="sb-met-lbl">RMSE</td>
+          <td class="sb-met-val" id="sb-rmse">—</td>
+        </tr>
+      </table>
+
+      <div class="sb-divider" style="margin-top:16px;"></div>
+
+      <div class="sb-metrics-heading">Selected District</div>
+      <div class="sb-district-row">
+        <span class="sb-dr-lbl">Actual</span>
+        <span class="sb-dr-val" id="sb-actual">—</span>
+      </div>
+      <div class="sb-district-row">
+        <span class="sb-dr-lbl">Predicted</span>
+        <span class="sb-dr-val amber" id="sb-pred">—</span>
+      </div>
+
+      <div class="sb-divider" style="margin-top:16px;"></div>
+
+      <div class="sb-metrics-heading">Enriched Model</div>
+      <table class="sb-metrics-table">
+        <tr>
+          <td class="sb-met-lbl">R²</td>
+          <td class="sb-met-val accent" id="sb-er2">—</td>
+        </tr>
+        <tr>
+          <td class="sb-met-lbl">RMSE</td>
+          <td class="sb-met-val" id="sb-ermse">—</td>
+        </tr>
+        <tr>
+          <td class="sb-met-lbl">MAE</td>
+          <td class="sb-met-val" id="sb-emae">—</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="sb-footer">
+      ICRISAT · IMD · data.gov.in<br>
+      560 districts · 1990–2015
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <div id="main">
+
+    <!-- Top nav -->
+    <nav id="topnav">
+      <div class="nav-brand">XAI <span>·</span> Crop</div>
+      <div class="nav-tabs">
+        <button class="tab-btn active" id="btn-eda"  onclick="switchTab('eda')">◈ &nbsp;Analysis</button>
+        <button class="tab-btn"        id="btn-maps" onclick="switchTab('maps')">▦ &nbsp;Maps</button>
+        <button class="tab-btn"        id="btn-shap" onclick="switchTab('shap')">◎ &nbsp;SHAP</button>
+      </div>
+    </nav>
+
+    <!-- Stat bar -->
+    <div id="stat-bar">
+      <div class="stat-card">
+        <div class="stat-val" id="stat-actual">—</div>
+        <div class="stat-lbl">Actual Yield</div>
+        <div class="stat-sub" id="stat-year">latest test year</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-pred">—</div>
+        <div class="stat-lbl">Predicted</div>
+        <div class="stat-sub" id="stat-delta">model estimate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-years">—</div>
+        <div class="stat-lbl">Years of Data</div>
+        <div class="stat-sub">1990 – 2015</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-districts">555</div>
+        <div class="stat-lbl">Districts</div>
+        <div class="stat-sub">in dataset</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-r2">—</div>
+        <div class="stat-lbl">Model R²</div>
+        <div class="stat-sub">XGBoost baseline</div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div id="content">
+
+      <!-- ══ TAB: ANALYSIS (EDA) ══ -->
+      <div id="tab-eda" class="tab-panel active">
+
+        <div class="section-head">
+          <span class="section-title">District Deep-Dive</span>
+          <span id="eda-district-label" class="district-tag">—</span>
+          <div class="section-rule"></div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-wrap"><div id="chart-hist" style="height:270px;"></div></div>
+          <div class="chart-wrap"><div id="chart-trend" style="height:270px;"></div></div>
+        </div>
+
+        <div class="section-head" style="margin-top:32px;">
+          <span class="section-title">Pre-computed EDA Figures</span>
+          <div class="section-rule"></div>
+        </div>
+        <div class="fig-grid" id="eda-fig-grid"></div>
+      </div>
+
+      <!-- ══ TAB: MAPS ══ -->
+      <div id="tab-maps" class="tab-panel">
+
+        <div class="section-head">
+          <span class="section-title">Average Rice Yield per District</span>
+          <div class="section-rule"></div>
+        </div>
+        <div class="metric-row" id="yield-metrics"></div>
+        <iframe class="map-frame" src="maps/choropleth_yield.html"></iframe>
+
+        <div class="section-head">
+          <span class="section-title">Yield Trend per District</span>
+          <div class="section-rule"></div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:14px;">
+          OLS slope (Kg/ha/yr) · 1990–2015 · green = improving · red = declining
+        </p>
+        <div class="metric-row" id="trend-metrics"></div>
+        <iframe class="map-frame" src="maps/choropleth_trend.html"></iframe>
+      </div>
+
+      <!-- ══ TAB: SHAP ══ -->
+      <div id="tab-shap" class="tab-panel">
+
+        <!-- Model comparison -->
+        <div class="section-head">
+          <span class="section-title">Model Comparison</span>
+          <div class="section-rule"></div>
+        </div>
+        <div class="model-grid">
+          <div class="model-card">
+            <div class="model-card-title">XGBoost · Baseline</div>
+            <div class="model-stat"><span class="s-label">RMSE</span><span class="s-val accent" id="xgb-rmse">—</span></div>
+            <div class="model-stat"><span class="s-label">MAE</span> <span class="s-val" id="xgb-mae">—</span></div>
+            <div class="model-stat"><span class="s-label">R²</span>  <span class="s-val" id="xgb-r2">—</span></div>
+          </div>
+          <div class="model-card">
+            <div class="model-card-title">TabNet · Attention-based</div>
+            <div class="model-stat"><span class="s-label">RMSE</span>       <span class="s-val" id="tn-rmse">—</span></div>
+            <div class="model-stat"><span class="s-label">MAE</span>        <span class="s-val" id="tn-mae">—</span></div>
+            <div class="model-stat"><span class="s-label">R²</span>         <span class="s-val" id="tn-r2">—</span></div>
+            <div class="model-stat"><span class="s-label">Train time</span> <span class="s-val" id="tn-time">—</span></div>
+          </div>
+        </div>
+        <div class="panel info">
+          XGBoost outperforms TabNet on this dataset for three reasons:
+          (1) ~23 samples per district is too few for TabNet's attention heads to converge meaningfully;
+          (2) agricultural features have threshold-style interactions that decision-tree splits capture natively;
+          (3) the high feature-to-row ratio makes deep networks prone to overfitting on small-N tabular data.
+        </div>
+
+        <!-- Global SHAP -->
+        <div class="section-head">
+          <span class="section-title">Global SHAP Explainability</span>
+          <div class="section-rule"></div>
+        </div>
+        <div class="fig-grid" id="shap-fig-grid"></div>
+
+        <!-- Live waterfall -->
+        <div class="section-head" style="margin-top:32px;">
+          <span class="section-title">Live SHAP Waterfall</span>
+          <span id="shap-district-label" class="district-tag">—</span>
+          <div class="section-rule"></div>
+        </div>
+
+        <div id="ctrl-summary" class="panel subtle" style="margin-bottom:14px;"></div>
+        <div class="chart-wrap" style="margin-bottom:16px;">
+          <div id="chart-shap" style="height:520px;"></div>
+        </div>
+        <div id="policy-lever" class="panel amber" style="display:none;margin-bottom:16px;"></div>
+
+        <div class="data-card">
+          <div class="data-card-head">Feature Breakdown · top 15 by |SHAP|</div>
+          <div class="data-card-body">
+            <table id="breakdown-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th style="text-align:center;">SHAP Impact (Kg/ha)</th>
+                  <th style="text-align:center;">Category</th>
+                </tr>
+              </thead>
+              <tbody id="breakdown-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /tab-shap -->
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
 
 <script>
-// ═══════════════════════════════════════════════════════════════════════
-// State
-// ═══════════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
+   STATE
+   ════════════════════════════════════════════════════════ */
 let META = {}, DISTRICTS = {}, MAPS = {}, TABNET = {}, SHAP = {};
 let selState = null, selDist = null, selCrop = null;
 
-const LAYOUT_BASE = {
-  paper_bgcolor: 'rgba(0,0,0,0)',
-  plot_bgcolor:  'rgba(0,0,0,0)',
-  font: { family: "'Inter', system-ui, sans-serif", size: 11, color: '#374151' },
-  margin: { t: 40, r: 20, b: 44, l: 60 },
+const C = {
+  ink:     '#1c1c1c',
+  muted:   '#7a7a6e',
+  accent:  '#c8922a',
+  pos:     '#2d5a2d',
+  neg:     '#7a3030',
+  bg:      'rgba(0,0,0,0)',
 };
 
-// ═══════════════════════════════════════════════════════════════════════
-// Boot
-// ═══════════════════════════════════════════════════════════════════════
+const LAYOUT_BASE = {
+  paper_bgcolor: C.bg,
+  plot_bgcolor:  C.bg,
+  font: { family: "'Source Sans 3','Helvetica Neue',sans-serif", size: 11, color: C.ink },
+  margin: { t: 36, r: 16, b: 40, l: 56 },
+};
+
+/* ════════════════════════════════════════════════════════
+   BOOT
+   ════════════════════════════════════════════════════════ */
 async function fetchJSON(url) {
   const r = await fetch(url);
   if (!r.ok) throw new Error(`Failed to load ${url} (${r.status})`);
@@ -322,21 +1009,25 @@ window.addEventListener('DOMContentLoaded', async () => {
       fetchJSON('data/tabnet.json'),
       fetchJSON('data/shap.json'),
     ]);
+    document.getElementById('loader').style.display = 'none';
     init();
   } catch (e) {
-    document.getElementById('loader').innerHTML =
-      `<p style="color:#dc2626;font-weight:600;">Error: ${e.message}</p>
-       <p style="color:#6b7280;font-size:.8rem;margin-top:8px;">
-         Make sure you're serving via HTTP:<br>
-         <code style="background:#f3f4f6;padding:2px 6px;border-radius:4px;">
-           python -m http.server 8080 --directory web
-         </code>
-       </p>`;
+    document.getElementById('loader').innerHTML = `
+      <div style="font-family:'Source Sans 3',sans-serif;text-align:center;max-width:400px;padding:0 24px;">
+        <div style="font-size:0.7rem;letter-spacing:.14em;text-transform:uppercase;
+                    color:#7a7a6e;margin-bottom:12px;">Error loading data</div>
+        <div style="font-size:0.85rem;color:#1c1c1c;margin-bottom:16px;">${e.message}</div>
+        <div style="font-size:0.78rem;color:#7a7a6e;line-height:1.7;">
+          Serve the dashboard via HTTP:<br>
+          <code style="background:#f2ede4;padding:2px 8px;font-size:.75rem;">
+            python -m http.server 8080 --directory web
+          </code>
+        </div>
+      </div>`;
   }
 });
 
 function init() {
-  document.getElementById('loader').style.display = 'none';
   populateSidebarMetrics();
   populateCropDropdown();
   populateStateDropdown();
@@ -344,17 +1035,33 @@ function init() {
   renderMapMetrics();
   renderEDAFigures();
   renderSHAPFigures();
+  setText('stat-r2', META.model_r2 || '—');
+  setText('stat-districts', Object.keys(DISTRICTS).length || '—');
 }
 
-// ═══════════════════════════════════════════════════════════════════════
-// Sidebar
-// ═══════════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
+   LANDING
+   ════════════════════════════════════════════════════════ */
+function beginAnalysis() {
+  const landing = document.getElementById('landing');
+  const app     = document.getElementById('app');
+  landing.classList.add('out');
+  app.style.display = 'flex';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => { app.classList.add('visible'); });
+  });
+  setTimeout(() => { landing.style.display = 'none'; }, 380);
+}
+
+/* ════════════════════════════════════════════════════════
+   SIDEBAR
+   ════════════════════════════════════════════════════════ */
 function populateSidebarMetrics() {
-  setText('sb-r2',   META.model_r2);
-  setText('sb-rmse', META.model_rmse + ' Kg/ha');
+  setText('sb-r2',   META.model_r2   || '—');
+  setText('sb-rmse', META.model_rmse ? META.model_rmse + ' Kg/ha' : '—');
   if (META.enriched_r2)   setText('sb-er2',   META.enriched_r2);
-  if (META.enriched_rmse) setText('sb-ermse', META.enriched_rmse);
-  if (META.enriched_mae)  setText('sb-emae',  META.enriched_mae);
+  if (META.enriched_rmse) setText('sb-ermse', META.enriched_rmse + ' Kg/ha');
+  if (META.enriched_mae)  setText('sb-emae',  META.enriched_mae  + ' Kg/ha');
 }
 
 function populateCropDropdown() {
@@ -387,7 +1094,6 @@ function populateDistrictDropdown() {
   const dists = Object.entries(DISTRICTS)
     .filter(([, v]) => v.state === selState)
     .map(([k]) => k).sort();
-
   const sel = document.getElementById('district-select');
   sel.innerHTML = '';
   dists.forEach(d => {
@@ -405,6 +1111,7 @@ function onDistrictChange() {
   setText('eda-district-label',  selDist);
   setText('shap-district-label', selDist);
   updateSidebarDistrictMetrics();
+  renderStatBar();
   renderLiveCharts();
   renderSHAPWaterfall();
 }
@@ -414,26 +1121,45 @@ function updateSidebarDistrictMetrics() {
   if (!d || !d.pred_years || !d.pred_years.length) {
     setText('sb-actual', '—'); setText('sb-pred', '—'); return;
   }
-  const lastIdx = d.pred_years.length - 1;
-  const act = d.actual_test[lastIdx], pred = d.pred_values[lastIdx];
-  setText('sb-actual', act  != null ? Math.round(act)  + ' Kg/ha' : '—');
-  setText('sb-pred',   pred != null ? Math.round(pred) + ' Kg/ha' : '—');
+  const i = d.pred_years.length - 1;
+  setText('sb-actual', d.actual_test[i] != null ? Math.round(d.actual_test[i]) + ' Kg/ha' : '—');
+  setText('sb-pred',   d.pred_values[i] != null ? Math.round(d.pred_values[i]) + ' Kg/ha' : '—');
 }
 
-// ═══════════════════════════════════════════════════════════════════════
-// Tab switching
-// ═══════════════════════════════════════════════════════════════════════
+function renderStatBar() {
+  const d = DISTRICTS[selDist];
+  if (!d) return;
+  const hasTest = d.pred_years && d.pred_years.length;
+  if (hasTest) {
+    const i    = d.pred_years.length - 1;
+    const act  = d.actual_test[i];
+    const pred = d.pred_values[i];
+    const yr   = d.pred_years[i];
+    setText('stat-actual', act  != null ? Math.round(act)  + ' Kg/ha' : '—');
+    setText('stat-pred',   pred != null ? Math.round(pred) + ' Kg/ha' : '—');
+    setText('stat-year',   yr ? `latest: ${yr}` : 'latest test year');
+    if (act != null && pred != null) {
+      const delta = pred - act;
+      setText('stat-delta', (delta >= 0 ? '+' : '') + Math.round(delta) + ' Kg/ha vs actual');
+    }
+  }
+  setText('stat-years', d.years ? d.years.length : '—');
+}
+
+/* ════════════════════════════════════════════════════════
+   TAB SWITCHING
+   ════════════════════════════════════════════════════════ */
 function switchTab(name) {
   document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  document.getElementById('btn-' + name).classList.add('active');
+  document.getElementById('tab-'  + name).classList.add('active');
+  document.getElementById('btn-'  + name).classList.add('active');
   if (name === 'shap') renderSHAPWaterfall();
 }
 
-// ═══════════════════════════════════════════════════════════════════════
-// Live charts (EDA tab)
-// ═══════════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
+   LIVE CHARTS
+   ════════════════════════════════════════════════════════ */
 function renderLiveCharts() {
   const d = DISTRICTS[selDist];
   if (!d) return;
@@ -442,61 +1168,55 @@ function renderLiveCharts() {
 }
 
 function renderHistogram(d) {
-  const col  = META.target;
-  const vals = (d[col] || []).filter(v => v != null);
+  const vals = (d[META.target] || []).filter(v => v != null);
   if (!vals.length) { Plotly.purge('chart-hist'); return; }
-
   Plotly.newPlot('chart-hist', [{
-    x: vals, type: 'histogram', nbinsx: 14,
-    marker: { color: '#16a34a', opacity: 0.8 },
+    x: vals, type: 'histogram', nbinsx: 12,
+    marker: { color: '#111a11', opacity: 0.75 },
     name: 'Rice Yield',
   }], {
     ...LAYOUT_BASE,
-    title: { text: `Yield Distribution — ${selDist}`, font: { size: 12 } },
-    xaxis: { title: { text: 'Rice Yield (Kg/ha)', font: { size: 10 } } },
-    yaxis: { title: { text: 'Years',              font: { size: 10 } } },
+    title: { text: `Yield distribution · ${selDist}`, font: { size: 11, color: C.muted }, x: 0.02 },
+    xaxis: { title: { text: 'Rice Yield (Kg/ha)', font: { size: 10 } }, gridcolor: '#eae5dc' },
+    yaxis: { title: { text: 'Years',              font: { size: 10 } }, gridcolor: '#eae5dc' },
   }, { responsive: true, displayModeBar: false });
 }
 
 function renderTrend(d) {
   const col = selCrop || META.target;
   if (!d.years) return;
-
   const traces = [{
     x: d.years, y: d[col] || [],
     type: 'scatter', mode: 'lines+markers',
     name: col.replace(' YIELD (Kg per ha)', ''),
-    line: { color: '#16a34a', width: 2 },
-    marker: { size: 5 },
-    fill: 'tozeroy', fillcolor: 'rgba(22,163,74,.08)',
+    line:   { color: '#111a11', width: 1.8 },
+    marker: { size: 4, color: '#111a11', symbol: 'circle' },
+    fill: 'tozeroy', fillcolor: 'rgba(17,26,17,0.05)',
   }];
-
   if (d.pred_years) {
     traces.push({
       x: d.pred_years, y: d.pred_values,
-      type: 'scatter', mode: 'markers',
-      name: 'Predicted (test)',
-      marker: { color: '#d97706', size: 9, symbol: 'diamond' },
+      type: 'scatter', mode: 'markers', name: 'Predicted',
+      marker: { color: C.accent, size: 8, symbol: 'diamond', line: { color: '#fff', width: 1 } },
     });
   }
-
   Plotly.newPlot('chart-trend', traces, {
     ...LAYOUT_BASE,
-    title: { text: `Yield Trend — ${selDist}`, font: { size: 12 } },
-    xaxis: { title: { text: 'Year',          font: { size: 10 } } },
-    yaxis: { title: { text: 'Yield (Kg/ha)', font: { size: 10 } } },
-    legend: { x: 0, y: 1, font: { size: 10 } },
+    title: { text: `Yield trend · ${selDist}`, font: { size: 11, color: C.muted }, x: 0.02 },
+    xaxis: { title: { text: 'Year',          font: { size: 10 } }, gridcolor: '#eae5dc' },
+    yaxis: { title: { text: 'Yield (Kg/ha)', font: { size: 10 } }, gridcolor: '#eae5dc' },
+    legend: { x: 0.02, y: 1, font: { size: 9 }, bgcolor: 'rgba(0,0,0,0)' },
   }, { responsive: true, displayModeBar: false });
 }
 
-// ═══════════════════════════════════════════════════════════════════════
-// EDA figures
-// ═══════════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
+   FIGURES
+   ════════════════════════════════════════════════════════ */
 function renderEDAFigures() {
   const grid = document.getElementById('eda-fig-grid');
   grid.innerHTML = '';
   (META.eda_figures || []).forEach((fig, i) => {
-    grid.appendChild(makeFigCard(`figures/${fig.file}`, fig.label, fig.caption, `eda-col-${i}`));
+    grid.appendChild(makeFigCard(`figures/${fig.file}`, fig.label, fig.caption, `eda-c-${i}`));
   });
 }
 
@@ -504,7 +1224,7 @@ function renderSHAPFigures() {
   const grid = document.getElementById('shap-fig-grid');
   grid.innerHTML = '';
   (META.shap_figures || []).forEach((fig, i) => {
-    grid.appendChild(makeFigCard(`figures/${fig.file}`, fig.label, fig.caption, `shap-col-${i}`));
+    grid.appendChild(makeFigCard(`figures/${fig.file}`, fig.label, fig.caption, `shap-c-${i}`));
   });
 }
 
@@ -516,10 +1236,10 @@ function makeFigCard(src, label, caption, id) {
          onerror="this.parentElement.style.display='none'" />
     <div class="fig-caption">
       <div class="fig-label">${label}</div>
-      <button class="collapsible-toggle" onclick="toggleCaption('${id}')">
-        <span>📖</span> What does this show?
+      <button class="fig-toggle" onclick="toggleCaption('${id}')">
+        ↳ &nbsp;What does this show?
       </button>
-      <div class="collapsible-body" id="${id}">${caption}</div>
+      <div class="fig-body" id="${id}">${caption}</div>
     </div>`;
   return card;
 }
@@ -528,53 +1248,52 @@ function toggleCaption(id) {
   document.getElementById(id).classList.toggle('open');
 }
 
-// ═══════════════════════════════════════════════════════════════════════
-// Maps
-// ═══════════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
+   MAPS
+   ════════════════════════════════════════════════════════ */
 function renderMapMetrics() {
   const s = MAPS.stats;
   if (!s) return;
-
   setHTML('yield-metrics', `
     ${metricCard('Districts Mapped', s.count, '')}
     ${metricCard('Highest Avg Yield', Math.round(s.max_yield) + ' Kg/ha', s.max_yield_district)}
     ${metricCard('Lowest Avg Yield',  Math.round(s.min_yield) + ' Kg/ha', s.min_yield_district)}
   `);
   setHTML('trend-metrics', `
-    ${metricCard('Improving Districts', s.improving, 'positive trend')}
-    ${metricCard('Declining Districts', s.declining, 'negative trend')}
+    ${metricCard('Improving Districts', s.improving, 'positive OLS slope')}
+    ${metricCard('Declining Districts', s.declining, 'negative OLS slope')}
     ${metricCard('Fastest Decline', s.fastest_decline_district, s.fastest_decline_slope.toFixed(1) + ' Kg/ha/yr')}
   `);
 }
 
 function metricCard(label, val, sub) {
   return `<div class="metric-card">
-    <div class="val">${val}</div>
-    <div class="lbl">${label}</div>
-    ${sub ? `<div class="sub">${sub}</div>` : ''}
+    <div class="mc-val">${val}</div>
+    <div class="mc-lbl">${label}</div>
+    ${sub ? `<div class="mc-sub">${sub}</div>` : ''}
   </div>`;
 }
 
-// ═══════════════════════════════════════════════════════════════════════
-// TabNet comparison
-// ═══════════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
+   TABNET
+   ════════════════════════════════════════════════════════ */
 function renderTabNet() {
-  setText('xgb-rmse', (META.model_rmse || '—') + ' Kg/ha');
-  setText('xgb-mae',  (META.model_mae  || '—') + ' Kg/ha');
-  setText('xgb-r2',   META.model_r2 || '—');
-  setText('tn-rmse',  (TABNET.rmse  || '—') + ' Kg/ha');
-  setText('tn-mae',   (TABNET.mae   || '—') + ' Kg/ha');
-  setText('tn-r2',    TABNET.r2  || '—');
+  setText('xgb-rmse', META.model_rmse ? META.model_rmse + ' Kg/ha' : '—');
+  setText('xgb-mae',  META.model_mae  ? META.model_mae  + ' Kg/ha' : '—');
+  setText('xgb-r2',   META.model_r2   || '—');
+  setText('tn-rmse',  TABNET.rmse  ? TABNET.rmse  + ' Kg/ha' : '—');
+  setText('tn-mae',   TABNET.mae   ? TABNET.mae   + ' Kg/ha' : '—');
+  setText('tn-r2',    TABNET.r2    != null ? TABNET.r2  : '—');
   setText('tn-time',  TABNET.train_time_s ? TABNET.train_time_s + ' s' : '—');
 }
 
-// ═══════════════════════════════════════════════════════════════════════
-// SHAP waterfall
-// ═══════════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
+   SHAP WATERFALL
+   ════════════════════════════════════════════════════════ */
 function renderSHAPWaterfall() {
   const data = SHAP.districts && SHAP.districts[selDist];
   if (!data) {
-    setHTML('ctrl-summary', `<em>No SHAP data for ${selDist} (district may be in training set).</em>`);
+    setHTML('ctrl-summary', `<em style="color:var(--text-muted);">No SHAP data for ${selDist} — district may be in training set.</em>`);
     Plotly.purge('chart-shap');
     document.getElementById('policy-lever').style.display = 'none';
     document.getElementById('breakdown-tbody').innerHTML = '';
@@ -585,52 +1304,54 @@ function renderSHAPWaterfall() {
   const categories = SHAP.categories;
   const values     = data.values;
   const base       = SHAP.base;
+  const sign       = v => v >= 0 ? '+' : '';
 
-  // Build pairs, sort by |value|
   const pairs = features.map((f, i) => ({
     feature: f, value: values[i], cat: categories[i], abs: Math.abs(values[i]),
   })).sort((a, b) => b.abs - a.abs).slice(0, 15);
 
-  // Controllability totals
   const ctrlTotal   = pairs.filter(p => p.cat === 'Controllable').reduce((s, p) => s + p.value, 0);
   const unctrlTotal = pairs.filter(p => p.cat === 'Uncontrollable').reduce((s, p) => s + p.value, 0);
-  const sign = v => v >= 0 ? '+' : '';
 
   setHTML('ctrl-summary',
-    `<strong>Prediction breakdown for ${selDist} (${data.year}):</strong><br>
-     Controllable factors contribute <strong>${sign(ctrlTotal)}${Math.round(ctrlTotal)} Kg/ha</strong> &nbsp;·&nbsp;
-     Uncontrollable factors contribute <strong>${sign(unctrlTotal)}${Math.round(unctrlTotal)} Kg/ha</strong>
-     relative to the national baseline (${Math.round(base)} Kg/ha).
-     &nbsp;|&nbsp; Actual: <strong>${Math.round(data.actual)} Kg/ha</strong>
-     &nbsp;·&nbsp; Predicted: <strong>${Math.round(data.predicted)} Kg/ha</strong>`
+    `<strong>${selDist} · ${data.year}</strong> &nbsp;—&nbsp;
+     Controllable factors: <strong>${sign(ctrlTotal)}${Math.round(ctrlTotal)} Kg/ha</strong> &nbsp;·&nbsp;
+     Uncontrollable factors: <strong>${sign(unctrlTotal)}${Math.round(unctrlTotal)} Kg/ha</strong>
+     &nbsp;·&nbsp; baseline ${Math.round(base)} Kg/ha &nbsp;·&nbsp;
+     actual <strong>${Math.round(data.actual)} Kg/ha</strong>
+     &nbsp;·&nbsp; predicted <strong>${Math.round(data.predicted)} Kg/ha</strong>`
   );
 
-  // Plotly horizontal bar
-  const colors = pairs.map(p => p.value >= 0 ? '#16a34a' : '#ef4444');
-  const labels = pairs.map(p => p.feature.length > 42 ? p.feature.slice(0, 39) + '…' : p.feature);
+  const colors = pairs.map(p => p.value >= 0 ? C.pos : C.neg);
+  const labels = pairs.map(p => p.feature.length > 44 ? p.feature.slice(0, 41) + '…' : p.feature);
 
   Plotly.newPlot('chart-shap', [{
     type: 'bar', orientation: 'h',
     x: pairs.map(p => p.value),
     y: labels,
-    marker: { color: colors },
+    marker: { color: colors, opacity: 0.82 },
     text: pairs.map(p => `${sign(p.value)}${p.value.toFixed(1)}`),
     textposition: 'outside',
+    textfont: { size: 9, color: C.muted },
     hovertemplate: '<b>%{y}</b><br>SHAP: %{x:.2f} Kg/ha<extra></extra>',
   }], {
     ...LAYOUT_BASE,
-    margin: { t: 50, r: 80, b: 60, l: 300 },
+    margin: { t: 44, r: 72, b: 56, l: 290 },
     height: 520,
-    title: { text: `SHAP Impact — ${selDist} (${data.year})  |  Base: ${Math.round(base)} Kg/ha`, font: { size: 12 } },
-    xaxis: {
-      title: { text: 'SHAP Value (Kg/ha impact on yield)', font: { size: 10 } },
-      zeroline: true, zerolinewidth: 2, zerolinecolor: '#d1d5db',
+    title: {
+      text: `SHAP attribution  ·  ${selDist}  (${data.year})  ·  base ${Math.round(base)} Kg/ha`,
+      font: { size: 11, color: C.muted }, x: 0.01,
     },
-    yaxis: { automargin: true },
-    shapes: [{ type: 'line', x0: 0, x1: 0, y0: -0.5, y1: pairs.length - 0.5, line: { color: '#6b7280', width: 1.5, dash: 'dot' } }],
+    xaxis: {
+      title: { text: 'SHAP value (Kg/ha)', font: { size: 10 } },
+      gridcolor: '#eae5dc',
+      zeroline: true, zerolinewidth: 1.5, zerolinecolor: '#c8b898',
+    },
+    yaxis: { automargin: true, gridcolor: '#eae5dc' },
     annotations: [{
-      x: 0, y: -0.08, xref: 'paper', yref: 'paper', showarrow: false,
-      text: `🟩 Controllable  🟥 Uncontrollable  ⬜ Structural`, font: { size: 10, color: '#6b7280' },
+      x: 0.01, y: -0.1, xref: 'paper', yref: 'paper', showarrow: false,
+      text: '▪ Controllable &nbsp;&nbsp; ▪ Uncontrollable &nbsp;&nbsp; ▪ Structural',
+      font: { size: 9, color: C.muted }, align: 'left',
     }],
   }, { responsive: true, displayModeBar: false });
 
@@ -643,11 +1364,12 @@ function renderSHAPWaterfall() {
     const dir = top.value > 0 ? 'increase' : 'decrease';
     leverEl.style.display = '';
     setHTML('policy-lever',
-      `<strong>🎯 Policy lever for ${selDist}:</strong>
-       <code style="background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px;">${top.feature}</code>
-       has the largest controllable SHAP impact (${sign(top.value)}${top.value.toFixed(1)} Kg/ha).
-       This factor is currently <strong>${top.value > 0 ? 'above' : 'below'} baseline</strong> —
-       maintaining or improving it would ${dir} yield.`
+      `<strong>◆ &nbsp;Policy lever for ${selDist}</strong> &nbsp;—&nbsp;
+       <code style="background:rgba(0,0,0,.06);padding:1px 6px;font-size:.8rem;">${top.feature}</code>
+       &nbsp;has the largest controllable SHAP impact
+       (${sign(top.value)}${top.value.toFixed(1)} Kg/ha).
+       Currently <strong>${top.value > 0 ? 'above' : 'below'} baseline</strong>
+       — maintaining or improving it would ${dir} yield.`
     );
   } else {
     leverEl.style.display = 'none';
@@ -657,24 +1379,26 @@ function renderSHAPWaterfall() {
   const tbody = document.getElementById('breakdown-tbody');
   tbody.innerHTML = '';
   pairs.forEach(p => {
-    const tr   = document.createElement('tr');
+    const tr    = document.createElement('tr');
     const badge = p.cat === 'Controllable'
       ? `<span class="badge badge-ctrl">Controllable</span>`
       : p.cat === 'Uncontrollable'
         ? `<span class="badge badge-unctrl">Uncontrollable</span>`
         : `<span class="badge badge-struct">Structural</span>`;
-    const valColor = p.value >= 0 ? '#16a34a' : '#ef4444';
+    const vc = p.value >= 0 ? C.pos : C.neg;
     tr.innerHTML = `
-      <td style="font-family:monospace;font-size:.78rem;color:#374151;">${p.feature}</td>
-      <td style="text-align:center;font-weight:700;color:${valColor};">${sign(p.value)}${p.value.toFixed(1)}</td>
+      <td style="font-family:monospace;font-size:.75rem;color:var(--text-mid);">${p.feature}</td>
+      <td style="text-align:center;font-family:'Playfair Display',serif;font-size:.9rem;color:${vc};">
+        ${sign(p.value)}${p.value.toFixed(1)}
+      </td>
       <td style="text-align:center;">${badge}</td>`;
     tbody.appendChild(tr);
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════
-// Helpers
-// ═══════════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════
+   HELPERS
+   ════════════════════════════════════════════════════════ */
 function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
 function setHTML(id, val) { const el = document.getElementById(id); if (el) el.innerHTML  = val; }
 </script>
