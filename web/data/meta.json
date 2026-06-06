@@ -1,0 +1,92 @@
+{
+  "target": "RICE YIELD (Kg per ha)",
+  "district_col": "Dist Name",
+  "state_col": "State Name",
+  "year_col": "Year",
+  "model_rmse": 379.56,
+  "model_mae": 263.69,
+  "model_r2": 0.8695,
+  "enriched_rmse": 373.1367,
+  "enriched_mae": 258.9945,
+  "enriched_r2": 0.8739,
+  "yield_cols": [
+    "RICE YIELD (Kg per ha)",
+    "PEARL MILLET YIELD (Kg per ha)",
+    "CHICKPEA YIELD (Kg per ha)",
+    "GROUNDNUT YIELD (Kg per ha)",
+    "SUGARCANE YIELD (Kg per ha)"
+  ],
+  "top2_shap": [
+    "RICE AREA (1000 ha)",
+    "State Name_enc"
+  ],
+  "eda_figures": [
+    {
+      "file": "yield_distribution.png",
+      "label": "Yield Distribution by Crop",
+      "caption": "Rice yield is bimodal \u2014 a high cluster around 3,500 Kg/ha (Indo-Gangetic plain) and a low cluster around 1,200 Kg/ha (peninsular and central India). This variance is structured geographic signal, not noise, and is why a national average is misleading."
+    },
+    {
+      "file": "yield_trend_yearly.png",
+      "label": "Year-wise Yield Trend (All Crops)",
+      "caption": "Rice shows a steady upward trend 1990\u20132015, reflecting compounding Green Revolution yield gains. Chickpea is nearly flat \u2014 differential technology adoption, not climate, drives this divergence."
+    },
+    {
+      "file": "district_yield_top_bottom.png",
+      "label": "Top / Bottom Districts",
+      "caption": "The yield gap between the best and worst district exceeds 4,500 Kg/ha \u2014 larger than the all-India average itself. Closing even half this gap in the bottom 15 districts would materially shift national output."
+    },
+    {
+      "file": "correlation_heatmap.png",
+      "label": "Correlation Heatmap",
+      "caption": "Summer maximum temperature is strongly negatively correlated with rice yield (heat stress during flowering reduces grain set). Monsoon precipitation is positively correlated. These are the biological underpinnings of the model's top uncontrollable features."
+    },
+    {
+      "file": "rainfall_vs_yield.png",
+      "label": "Rainfall vs Yield",
+      "caption": "The relationship is non-linear: yield rises steeply with rainfall up to ~1,200 mm then plateaus or declines \u2014 consistent with waterlogging effects in high-rainfall coastal districts."
+    },
+    {
+      "file": "yield_by_season.png",
+      "label": "Yield by Season",
+      "caption": "Kharif (monsoon) yields are higher on average but more variable; Rabi (winter) yields are lower but more stable. The stability gap reflects irrigation dependency \u2014 Rabi crops are mostly irrigated, insulating them from rainfall shocks."
+    },
+    {
+      "file": "actual_vs_predicted.png",
+      "label": "Actual vs Predicted",
+      "caption": "The model fits well across the middle of the yield range. Residual heteroscedasticity is visible at high yields \u2014 the model underestimates the best-performing districts, likely because exceptional input conditions are underrepresented in training data."
+    },
+    {
+      "file": "feature_importance.png",
+      "label": "XGBoost Feature Importance",
+      "caption": "XGBoost's native gain-based importance ranks sown area highest. This measure is biased toward high-cardinality features. The SHAP beeswarm in the SHAP tab gives the corrected, unbiased picture."
+    }
+  ],
+  "shap_figures": [
+    {
+      "file": "shap/shap_beeswarm.png",
+      "label": "Global Feature Importance (Beeswarm)",
+      "caption": "Each dot is one district-year in the test set. Features are ranked by mean absolute SHAP value. Rice sown area dominates globally. Nitrogen shows a positive tail \u2014 high-N districts consistently outperform the baseline. Red = high feature value, blue = low."
+    },
+    {
+      "file": "shap/shap_waterfall_worst.png",
+      "label": "Waterfall \u2014 Worst Prediction",
+      "caption": "Low monsoon rainfall and minimal sown area together pull the prediction ~800 Kg/ha below baseline. These are uncontrollable drivers \u2014 this district needs a climate adaptation strategy, not a fertilizer subsidy."
+    },
+    {
+      "file": "shap/shap_waterfall_best.png",
+      "label": "Waterfall \u2014 Best Prediction",
+      "caption": "High irrigation area and nitrogen each push the prediction 300\u2013400 Kg/ha above the model baseline. Every bar is one feature's additive contribution \u2014 they sum to the final prediction minus the baseline."
+    },
+    {
+      "file": "shap/shap_dependence_RICE_AREA_1000_ha.png",
+      "label": "SHAP Dependence \u2014 Rice Area",
+      "caption": "Scatter of Rice Area's value vs. its SHAP contribution, coloured by the strongest interacting feature. The relationship is strongly positive with diminishing returns \u2014 very large sown areas show compressed SHAP gains."
+    },
+    {
+      "file": "shap/shap_dependence_State_Name_enc.png",
+      "label": "SHAP Dependence \u2014 State",
+      "caption": "State encoding captures unobserved regional effects (soil quality, infrastructure, policy). Punjab and Haryana cluster at high positive SHAP values; eastern states cluster at negative \u2014 consistent with known yield geography."
+    }
+  ]
+}

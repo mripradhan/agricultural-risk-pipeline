@@ -1,0 +1,2790 @@
+{
+  "districts": [
+    {
+      "name": "Durg",
+      "avg_yield": 1381.3077,
+      "slope": 20.9012
+    },
+    {
+      "name": "Bastar",
+      "avg_yield": 1172.4231,
+      "slope": 25.72
+    },
+    {
+      "name": "Raipur",
+      "avg_yield": 1375.3846,
+      "slope": 13.1132
+    },
+    {
+      "name": "Bilaspur",
+      "avg_yield": 1351.3846,
+      "slope": 24.0205
+    },
+    {
+      "name": "Raigarh",
+      "avg_yield": 1158.3846,
+      "slope": 12.8622
+    },
+    {
+      "name": "Surguja",
+      "avg_yield": 1085.5769,
+      "slope": 27.0889
+    },
+    {
+      "name": "Jabalpur",
+      "avg_yield": 859.3462,
+      "slope": 21.5901
+    },
+    {
+      "name": "Balaghat",
+      "avg_yield": 1256.8462,
+      "slope": 21.5836
+    },
+    {
+      "name": "Chhindwara",
+      "avg_yield": 1027.2308,
+      "slope": 54.2031
+    },
+    {
+      "name": "Narsinghpur",
+      "avg_yield": 1170.8077,
+      "slope": 23.5121
+    },
+    {
+      "name": "Seoni",
+      "avg_yield": 1190.6923,
+      "slope": 26.1244
+    },
+    {
+      "name": "Mandla",
+      "avg_yield": 751.8462,
+      "slope": 14.772
+    },
+    {
+      "name": "Sagar",
+      "avg_yield": 592.3077,
+      "slope": -2.4485
+    },
+    {
+      "name": "Damoh",
+      "avg_yield": 723.5385,
+      "slope": 15.0913
+    },
+    {
+      "name": "Tikamgarh",
+      "avg_yield": 595.1923,
+      "slope": -24.1501
+    },
+    {
+      "name": "Chhatarpur",
+      "avg_yield": 661.2308,
+      "slope": -10.854
+    },
+    {
+      "name": "Panna",
+      "avg_yield": 625.0,
+      "slope": 12.9757
+    },
+    {
+      "name": "Rewa",
+      "avg_yield": 840.0,
+      "slope": 27.2068
+    },
+    {
+      "name": "Sidhi",
+      "avg_yield": 703.6538,
+      "slope": 22.4421
+    },
+    {
+      "name": "Satna",
+      "avg_yield": 895.1923,
+      "slope": 64.7908
+    },
+    {
+      "name": "Shahdol",
+      "avg_yield": 989.0,
+      "slope": 44.9662
+    },
+    {
+      "name": "Gwalior",
+      "avg_yield": 2084.3077,
+      "slope": 27.0783
+    },
+    {
+      "name": "Shivpuri",
+      "avg_yield": 1118.2692,
+      "slope": 25.0267
+    },
+    {
+      "name": "Guna",
+      "avg_yield": 930.2692,
+      "slope": 42.455
+    },
+    {
+      "name": "Datia",
+      "avg_yield": 1034.1154,
+      "slope": 25.8089
+    },
+    {
+      "name": "Morena",
+      "avg_yield": 2265.1923,
+      "slope": 37.6783
+    },
+    {
+      "name": "Bhind",
+      "avg_yield": 2314.5,
+      "slope": 64.1262
+    },
+    {
+      "name": "Indore",
+      "avg_yield": 194.0385,
+      "slope": -24.1658
+    },
+    {
+      "name": "Ratlam",
+      "avg_yield": 626.5769,
+      "slope": 0.2629
+    },
+    {
+      "name": "Ujjain",
+      "avg_yield": 151.0,
+      "slope": -12.7938
+    },
+    {
+      "name": "Mandsaur",
+      "avg_yield": 207.8462,
+      "slope": -23.6315
+    },
+    {
+      "name": "Dewas",
+      "avg_yield": 626.3846,
+      "slope": 2.9313
+    },
+    {
+      "name": "Dhar",
+      "avg_yield": 569.5,
+      "slope": -0.2075
+    },
+    {
+      "name": "Jhabua",
+      "avg_yield": 541.3846,
+      "slope": 10.7747
+    },
+    {
+      "name": "Khargone",
+      "avg_yield": 580.9615,
+      "slope": 7.7173
+    },
+    {
+      "name": "Khandwa",
+      "avg_yield": 896.7692,
+      "slope": 8.0602
+    },
+    {
+      "name": "Sehore",
+      "avg_yield": 1182.1154,
+      "slope": 81.5894
+    },
+    {
+      "name": "Raisen",
+      "avg_yield": 953.9615,
+      "slope": 32.3696
+    },
+    {
+      "name": "Vidisha",
+      "avg_yield": 694.3462,
+      "slope": 15.7467
+    },
+    {
+      "name": "Betul",
+      "avg_yield": 1154.7692,
+      "slope": 42.3897
+    },
+    {
+      "name": "Rajgarh",
+      "avg_yield": 618.6923,
+      "slope": 9.6226
+    },
+    {
+      "name": "Shajapur",
+      "avg_yield": 569.0385,
+      "slope": -14.0031
+    },
+    {
+      "name": "Hoshangabad",
+      "avg_yield": 1624.6154,
+      "slope": 66.0561
+    },
+    {
+      "name": "Srikakulam",
+      "avg_yield": 2017.7308,
+      "slope": 7.2653
+    },
+    {
+      "name": "Visakhapatnam",
+      "avg_yield": 1552.4615,
+      "slope": 13.427
+    },
+    {
+      "name": "East Godavari",
+      "avg_yield": 3133.7692,
+      "slope": 52.6844
+    },
+    {
+      "name": "West Godavari",
+      "avg_yield": 3287.6154,
+      "slope": 39.4557
+    },
+    {
+      "name": "Krishna",
+      "avg_yield": 3100.2692,
+      "slope": 35.0472
+    },
+    {
+      "name": "Guntur",
+      "avg_yield": 3194.5385,
+      "slope": 17.9706
+    },
+    {
+      "name": "S.P.S. Nellore",
+      "avg_yield": 3264.9615,
+      "slope": 78.0154
+    },
+    {
+      "name": "Kurnool",
+      "avg_yield": 2998.7692,
+      "slope": 49.9651
+    },
+    {
+      "name": "Anantapur",
+      "avg_yield": 2558.4231,
+      "slope": 26.2335
+    },
+    {
+      "name": "Kadapa YSR",
+      "avg_yield": 2626.2308,
+      "slope": 8.3268
+    },
+    {
+      "name": "Chittoor",
+      "avg_yield": 2678.8846,
+      "slope": 56.9863
+    },
+    {
+      "name": "Hyderabad",
+      "avg_yield": 393.9231,
+      "slope": -41.1583
+    },
+    {
+      "name": "Nizamabad",
+      "avg_yield": 2839.9615,
+      "slope": 70.7709
+    },
+    {
+      "name": "Medak",
+      "avg_yield": 2518.7308,
+      "slope": 66.7942
+    },
+    {
+      "name": "Mahabubnagar",
+      "avg_yield": 2287.4231,
+      "slope": 34.9405
+    },
+    {
+      "name": "Nalgonda",
+      "avg_yield": 2886.0769,
+      "slope": 22.7897
+    },
+    {
+      "name": "Warangal",
+      "avg_yield": 2718.1154,
+      "slope": 35.2195
+    },
+    {
+      "name": "Khammam",
+      "avg_yield": 2657.3846,
+      "slope": 35.3874
+    },
+    {
+      "name": "Karimnagar",
+      "avg_yield": 3081.5769,
+      "slope": 38.6718
+    },
+    {
+      "name": "Adilabad",
+      "avg_yield": 2137.8077,
+      "slope": 49.6352
+    },
+    {
+      "name": "Kolar",
+      "avg_yield": 2207.8077,
+      "slope": -21.1839
+    },
+    {
+      "name": "Tumkur",
+      "avg_yield": 2664.2692,
+      "slope": 15.6516
+    },
+    {
+      "name": "Mysore",
+      "avg_yield": 3047.5385,
+      "slope": 14.9997
+    },
+    {
+      "name": "Mandya",
+      "avg_yield": 3177.3077,
+      "slope": 22.2462
+    },
+    {
+      "name": "Hassan",
+      "avg_yield": 2489.1154,
+      "slope": 11.9785
+    },
+    {
+      "name": "Shimoge",
+      "avg_yield": 2413.3462,
+      "slope": 23.9573
+    },
+    {
+      "name": "Chickmagalur",
+      "avg_yield": 2416.5769,
+      "slope": 13.6899
+    },
+    {
+      "name": "Chitradurga",
+      "avg_yield": 2550.2692,
+      "slope": -37.0971
+    },
+    {
+      "name": "Bellary",
+      "avg_yield": 3227.6538,
+      "slope": 41.9689
+    },
+    {
+      "name": "Dharwad",
+      "avg_yield": 1066.1154,
+      "slope": -3.9778
+    },
+    {
+      "name": "Belgaum",
+      "avg_yield": 1548.3846,
+      "slope": 8.2817
+    },
+    {
+      "name": "Bijapur",
+      "avg_yield": 1817.1143,
+      "slope": 41.9304
+    },
+    {
+      "name": "Bidar",
+      "avg_yield": 740.4231,
+      "slope": 11.1573
+    },
+    {
+      "name": "Raichur",
+      "avg_yield": 2925.6154,
+      "slope": 7.2773
+    },
+    {
+      "name": "Gulbarga",
+      "avg_yield": 1989.6538,
+      "slope": 25.5812
+    },
+    {
+      "name": "Dakshina Kannada",
+      "avg_yield": 2230.9615,
+      "slope": 36.0619
+    },
+    {
+      "name": "Uttara Kannada",
+      "avg_yield": 1803.9615,
+      "slope": 13.7446
+    },
+    {
+      "name": "Kodagu",
+      "avg_yield": 2397.5,
+      "slope": 19.9121
+    },
+    {
+      "name": "Chengalpattu MGR / Kancheepuram",
+      "avg_yield": 3518.7692,
+      "slope": 54.9846
+    },
+    {
+      "name": "South Arcot / Cuddalore",
+      "avg_yield": 3152.6538,
+      "slope": 7.7186
+    },
+    {
+      "name": "North Arcot / Vellore",
+      "avg_yield": 3508.2692,
+      "slope": 61.7453
+    },
+    {
+      "name": "Salem",
+      "avg_yield": 3961.3462,
+      "slope": 51.7385
+    },
+    {
+      "name": "Coimbatore",
+      "avg_yield": 3542.3462,
+      "slope": 23.452
+    },
+    {
+      "name": "Tiruchirapalli / Trichy",
+      "avg_yield": 3679.8077,
+      "slope": 39.3323
+    },
+    {
+      "name": "Thanjavur",
+      "avg_yield": 3113.4615,
+      "slope": 25.2629
+    },
+    {
+      "name": "Madurai",
+      "avg_yield": 3785.9231,
+      "slope": 17.2875
+    },
+    {
+      "name": "Ramananthapuram",
+      "avg_yield": 1611.9231,
+      "slope": 24.013
+    },
+    {
+      "name": "Thirunelveli",
+      "avg_yield": 4229.5769,
+      "slope": 38.1378
+    },
+    {
+      "name": "The Nilgiris",
+      "avg_yield": 3343.0385,
+      "slope": 92.9774
+    },
+    {
+      "name": "Kanyakumari",
+      "avg_yield": 4200.3077,
+      "slope": 55.2629
+    },
+    {
+      "name": "Thane",
+      "avg_yield": 2133.0,
+      "slope": 16.6133
+    },
+    {
+      "name": "Raigad",
+      "avg_yield": 2425.6923,
+      "slope": 25.5111
+    },
+    {
+      "name": "Ratnagiri",
+      "avg_yield": 2541.8077,
+      "slope": 24.7176
+    },
+    {
+      "name": "Nasik",
+      "avg_yield": 1128.6154,
+      "slope": 0.281
+    },
+    {
+      "name": "Dhule",
+      "avg_yield": 815.4231,
+      "slope": 2.5911
+    },
+    {
+      "name": "Jalgaon",
+      "avg_yield": 792.6538,
+      "slope": -34.5391
+    },
+    {
+      "name": "Ahmednagar",
+      "avg_yield": 960.0385,
+      "slope": -6.3217
+    },
+    {
+      "name": "Pune",
+      "avg_yield": 1283.3462,
+      "slope": 13.6687
+    },
+    {
+      "name": "Satara",
+      "avg_yield": 1732.1923,
+      "slope": -7.0116
+    },
+    {
+      "name": "Sangli",
+      "avg_yield": 2116.0,
+      "slope": -0.9197
+    },
+    {
+      "name": "Solapur",
+      "avg_yield": 698.2308,
+      "slope": -38.8
+    },
+    {
+      "name": "Kolhapur",
+      "avg_yield": 2561.0385,
+      "slope": 15.5094
+    },
+    {
+      "name": "Aurangabad",
+      "avg_yield": 1334.2885,
+      "slope": 18.0508
+    },
+    {
+      "name": "Parbhani",
+      "avg_yield": 454.0769,
+      "slope": -24.9662
+    },
+    {
+      "name": "Beed",
+      "avg_yield": 518.5,
+      "slope": -17.5518
+    },
+    {
+      "name": "Nanded",
+      "avg_yield": 589.8077,
+      "slope": -18.6568
+    },
+    {
+      "name": "Osmanabad",
+      "avg_yield": 413.0385,
+      "slope": -14.3874
+    },
+    {
+      "name": "Buldhana",
+      "avg_yield": 384.6923,
+      "slope": -42.4014
+    },
+    {
+      "name": "Akola",
+      "avg_yield": 241.5769,
+      "slope": -36.9911
+    },
+    {
+      "name": "Amarawati",
+      "avg_yield": 615.9615,
+      "slope": -7.5874
+    },
+    {
+      "name": "Yeotmal",
+      "avg_yield": 603.6538,
+      "slope": -19.3556
+    },
+    {
+      "name": "Wardha",
+      "avg_yield": 555.1538,
+      "slope": -37.2048
+    },
+    {
+      "name": "Nagpur",
+      "avg_yield": 1228.0,
+      "slope": 5.4585
+    },
+    {
+      "name": "Bhandara",
+      "avg_yield": 1364.5385,
+      "slope": 17.1809
+    },
+    {
+      "name": "Chandrapur",
+      "avg_yield": 1251.1154,
+      "slope": -12.9747
+    },
+    {
+      "name": "Ahmedabad",
+      "avg_yield": 1808.9231,
+      "slope": 62.6318
+    },
+    {
+      "name": "Amreli",
+      "avg_yield": 307.6923,
+      "slope": -50.5983
+    },
+    {
+      "name": "Banaskantha",
+      "avg_yield": 475.9615,
+      "slope": -64.4872
+    },
+    {
+      "name": "Bharuch",
+      "avg_yield": 1351.8462,
+      "slope": 55.814
+    },
+    {
+      "name": "Vadodara",
+      "avg_yield": 1079.5769,
+      "slope": 29.4116
+    },
+    {
+      "name": "Bhavnagar",
+      "avg_yield": 878.2308,
+      "slope": -104.6749
+    },
+    {
+      "name": "Valsad",
+      "avg_yield": 2088.0,
+      "slope": 0.4424
+    },
+    {
+      "name": "Dangs",
+      "avg_yield": 1291.8846,
+      "slope": 39.6434
+    },
+    {
+      "name": "Jamnagar",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Junagadh",
+      "avg_yield": 755.3077,
+      "slope": -76.0185
+    },
+    {
+      "name": "Kheda",
+      "avg_yield": 1966.5769,
+      "slope": 38.84
+    },
+    {
+      "name": "Kutch",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Mehsana",
+      "avg_yield": 1845.6154,
+      "slope": 40.88
+    },
+    {
+      "name": "Panchmahal",
+      "avg_yield": 805.1538,
+      "slope": 27.5672
+    },
+    {
+      "name": "Rajkot",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Sabarkantha",
+      "avg_yield": 1786.3462,
+      "slope": 58.2862
+    },
+    {
+      "name": "Surat",
+      "avg_yield": 2122.7692,
+      "slope": 15.2916
+    },
+    {
+      "name": "Surendranagar",
+      "avg_yield": 1561.8846,
+      "slope": -24.5296
+    },
+    {
+      "name": "Ajmer",
+      "avg_yield": 1329.6154,
+      "slope": 10.88
+    },
+    {
+      "name": "Alwar",
+      "avg_yield": 1483.7308,
+      "slope": 42.0885
+    },
+    {
+      "name": "Banswara",
+      "avg_yield": 697.5385,
+      "slope": 4.0732
+    },
+    {
+      "name": "Barmer",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Bharatpur",
+      "avg_yield": 1545.2308,
+      "slope": 26.6311
+    },
+    {
+      "name": "Bhilwara",
+      "avg_yield": 1437.5,
+      "slope": 52.0031
+    },
+    {
+      "name": "Bikaner",
+      "avg_yield": 1291.8462,
+      "slope": 54.8978
+    },
+    {
+      "name": "Bundi",
+      "avg_yield": 1588.9231,
+      "slope": 28.4383
+    },
+    {
+      "name": "Chittorgarh",
+      "avg_yield": 1414.4231,
+      "slope": 55.0602
+    },
+    {
+      "name": "Churu",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Dungarpur",
+      "avg_yield": 657.0769,
+      "slope": 3.6896
+    },
+    {
+      "name": "Ganganagar",
+      "avg_yield": 2447.7692,
+      "slope": 42.6318
+    },
+    {
+      "name": "Jaipur",
+      "avg_yield": 452.1538,
+      "slope": -53.8024
+    },
+    {
+      "name": "Jaisalmer",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Jalore",
+      "avg_yield": 38.4615,
+      "slope": -4.4444
+    },
+    {
+      "name": "Jhalawar",
+      "avg_yield": 1524.1538,
+      "slope": 57.7812
+    },
+    {
+      "name": "Jhunjhunu",
+      "avg_yield": 63.5385,
+      "slope": 0.5648
+    },
+    {
+      "name": "Jodhpur",
+      "avg_yield": 46.1538,
+      "slope": -2.8718
+    },
+    {
+      "name": "Kota",
+      "avg_yield": 1949.0,
+      "slope": 57.0605
+    },
+    {
+      "name": "Nagaur",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Pali",
+      "avg_yield": 432.9615,
+      "slope": -59.774
+    },
+    {
+      "name": "Swami Madhopur",
+      "avg_yield": 1413.7692,
+      "slope": 52.3029
+    },
+    {
+      "name": "Sikar",
+      "avg_yield": 51.2692,
+      "slope": -5.9244
+    },
+    {
+      "name": "Sirohi",
+      "avg_yield": 1018.1154,
+      "slope": -35.0356
+    },
+    {
+      "name": "Tonk",
+      "avg_yield": 643.8846,
+      "slope": 24.0325
+    },
+    {
+      "name": "Udaipur",
+      "avg_yield": 761.7308,
+      "slope": 17.013
+    },
+    {
+      "name": "Gurdaspur",
+      "avg_yield": 2942.1154,
+      "slope": 24.6896
+    },
+    {
+      "name": "Amritsar",
+      "avg_yield": 2893.8462,
+      "slope": -4.1491
+    },
+    {
+      "name": "Kapurthala",
+      "avg_yield": 3492.4615,
+      "slope": 46.1627
+    },
+    {
+      "name": "Jalandhar",
+      "avg_yield": 3538.6538,
+      "slope": 18.853
+    },
+    {
+      "name": "Hoshiarpur",
+      "avg_yield": 3148.1154,
+      "slope": 30.1726
+    },
+    {
+      "name": "Roopnagar",
+      "avg_yield": 3427.0,
+      "slope": 30.335
+    },
+    {
+      "name": "Ludhiana",
+      "avg_yield": 4094.8462,
+      "slope": 46.8342
+    },
+    {
+      "name": "Ferozpur",
+      "avg_yield": 3713.8846,
+      "slope": 26.6315
+    },
+    {
+      "name": "Faridkot",
+      "avg_yield": 3830.0,
+      "slope": 24.3056
+    },
+    {
+      "name": "Bhatinda",
+      "avg_yield": 3949.9231,
+      "slope": 39.1542
+    },
+    {
+      "name": "Sangrur",
+      "avg_yield": 4148.8846,
+      "slope": 55.3474
+    },
+    {
+      "name": "Patiala",
+      "avg_yield": 3674.5385,
+      "slope": 39.8003
+    },
+    {
+      "name": "Hissar",
+      "avg_yield": 2724.3077,
+      "slope": -45.0017
+    },
+    {
+      "name": "Sirsa",
+      "avg_yield": 3337.5769,
+      "slope": 14.6376
+    },
+    {
+      "name": "Bhiwani",
+      "avg_yield": 1675.0385,
+      "slope": 92.9043
+    },
+    {
+      "name": "Gurgaon",
+      "avg_yield": 2868.6154,
+      "slope": 6.975
+    },
+    {
+      "name": "Jind",
+      "avg_yield": 2448.4231,
+      "slope": 6.7846
+    },
+    {
+      "name": "Mahendragarh",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Ambala",
+      "avg_yield": 3170.8077,
+      "slope": 60.6308
+    },
+    {
+      "name": "Karnal",
+      "avg_yield": 2882.2692,
+      "slope": 34.5911
+    },
+    {
+      "name": "Kurukshetra",
+      "avg_yield": 3388.2692,
+      "slope": 45.6181
+    },
+    {
+      "name": "Rohtak",
+      "avg_yield": 1863.4231,
+      "slope": -19.9648
+    },
+    {
+      "name": "Sonepat",
+      "avg_yield": 2221.8077,
+      "slope": 15.6311
+    },
+    {
+      "name": "Faridabad",
+      "avg_yield": 2602.1154,
+      "slope": -15.4738
+    },
+    {
+      "name": "Saharanpur",
+      "avg_yield": 2360.9231,
+      "slope": -4.5395
+    },
+    {
+      "name": "Muzaffarnagar",
+      "avg_yield": 2450.1923,
+      "slope": -3.1497
+    },
+    {
+      "name": "Meerut",
+      "avg_yield": 2424.2692,
+      "slope": 22.8044
+    },
+    {
+      "name": "Buland Shahar",
+      "avg_yield": 2248.3077,
+      "slope": 29.2014
+    },
+    {
+      "name": "Ghaziabad",
+      "avg_yield": 2360.0385,
+      "slope": 23.7344
+    },
+    {
+      "name": "Aligarh",
+      "avg_yield": 1948.5769,
+      "slope": 24.6745
+    },
+    {
+      "name": "Mathura",
+      "avg_yield": 2219.6154,
+      "slope": 14.1238
+    },
+    {
+      "name": "Agra",
+      "avg_yield": 2058.5769,
+      "slope": 25.065
+    },
+    {
+      "name": "Mainpuri",
+      "avg_yield": 2203.1538,
+      "slope": 33.8038
+    },
+    {
+      "name": "Etah",
+      "avg_yield": 1968.5385,
+      "slope": 25.1754
+    },
+    {
+      "name": "Bareilly",
+      "avg_yield": 2018.2308,
+      "slope": 1.5945
+    },
+    {
+      "name": "Budaun",
+      "avg_yield": 1768.0385,
+      "slope": 16.2068
+    },
+    {
+      "name": "Moradabad",
+      "avg_yield": 2267.0,
+      "slope": -6.4568
+    },
+    {
+      "name": "Shahjahanpur",
+      "avg_yield": 2426.0769,
+      "slope": 15.0865
+    },
+    {
+      "name": "Pilibhit",
+      "avg_yield": 2675.8462,
+      "slope": 0.4178
+    },
+    {
+      "name": "Rampur",
+      "avg_yield": 2240.3077,
+      "slope": -7.9747
+    },
+    {
+      "name": "Bijnor",
+      "avg_yield": 2667.3077,
+      "slope": -13.9179
+    },
+    {
+      "name": "Farrukhabad",
+      "avg_yield": 2127.3846,
+      "slope": 26.3508
+    },
+    {
+      "name": "Etawah",
+      "avg_yield": 2418.1538,
+      "slope": 31.6308
+    },
+    {
+      "name": "Fatehpur",
+      "avg_yield": 1918.0769,
+      "slope": 23.6321
+    },
+    {
+      "name": "Allahabad",
+      "avg_yield": 2043.4615,
+      "slope": 31.6609
+    },
+    {
+      "name": "Jhansi",
+      "avg_yield": 1269.6538,
+      "slope": 55.1504
+    },
+    {
+      "name": "Lalitpur",
+      "avg_yield": 649.3462,
+      "slope": 3.2489
+    },
+    {
+      "name": "Jalaun",
+      "avg_yield": 1070.0769,
+      "slope": 31.3087
+    },
+    {
+      "name": "Hamirpur",
+      "avg_yield": 1228.3077,
+      "slope": 15.906
+    },
+    {
+      "name": "Banda",
+      "avg_yield": 1171.2692,
+      "slope": 22.4133
+    },
+    {
+      "name": "Varanasi",
+      "avg_yield": 2128.8462,
+      "slope": -15.2041
+    },
+    {
+      "name": "Mirzpur",
+      "avg_yield": 1897.6923,
+      "slope": 11.0475
+    },
+    {
+      "name": "Jaunpur",
+      "avg_yield": 2014.0,
+      "slope": 9.1104
+    },
+    {
+      "name": "Ghazipur",
+      "avg_yield": 2015.7692,
+      "slope": 10.0821
+    },
+    {
+      "name": "Ballia",
+      "avg_yield": 1745.4615,
+      "slope": 21.6752
+    },
+    {
+      "name": "Gorakhpur",
+      "avg_yield": 1779.6154,
+      "slope": 23.9679
+    },
+    {
+      "name": "Deoria",
+      "avg_yield": 1927.5,
+      "slope": -4.5104
+    },
+    {
+      "name": "Basti",
+      "avg_yield": 1846.0385,
+      "slope": 31.2332
+    },
+    {
+      "name": "Azamgarh",
+      "avg_yield": 1850.3462,
+      "slope": 11.3932
+    },
+    {
+      "name": "Lucknow",
+      "avg_yield": 1810.5385,
+      "slope": 28.6496
+    },
+    {
+      "name": "Unnao",
+      "avg_yield": 1623.7692,
+      "slope": 21.2321
+    },
+    {
+      "name": "Rae-Bareily",
+      "avg_yield": 1955.5385,
+      "slope": 32.413
+    },
+    {
+      "name": "Sitapur",
+      "avg_yield": 1830.4615,
+      "slope": 25.4263
+    },
+    {
+      "name": "Hardoi",
+      "avg_yield": 2023.0385,
+      "slope": 20.5412
+    },
+    {
+      "name": "Kheri",
+      "avg_yield": 2283.4615,
+      "slope": 11.3354
+    },
+    {
+      "name": "Faizabad",
+      "avg_yield": 2205.3462,
+      "slope": 14.6301
+    },
+    {
+      "name": "Gonda",
+      "avg_yield": 1881.0385,
+      "slope": 32.468
+    },
+    {
+      "name": "Bahraich",
+      "avg_yield": 1776.5,
+      "slope": 38.0762
+    },
+    {
+      "name": "Sultanpur",
+      "avg_yield": 2039.5,
+      "slope": 22.9056
+    },
+    {
+      "name": "Pratapgarh",
+      "avg_yield": 1951.7059,
+      "slope": 12.3939
+    },
+    {
+      "name": "Barabanki",
+      "avg_yield": 2223.2308,
+      "slope": 33.9521
+    },
+    {
+      "name": "Nainital",
+      "avg_yield": 2653.5769,
+      "slope": -10.0031
+    },
+    {
+      "name": "Almorah",
+      "avg_yield": 1068.7308,
+      "slope": -2.1781
+    },
+    {
+      "name": "Pithorgarh",
+      "avg_yield": 1266.6538,
+      "slope": 5.0472
+    },
+    {
+      "name": "Chamoli",
+      "avg_yield": 1290.5385,
+      "slope": 1.6315
+    },
+    {
+      "name": "Uttar Kashi",
+      "avg_yield": 1520.8077,
+      "slope": 13.2783
+    },
+    {
+      "name": "Tehri Garhwal",
+      "avg_yield": 1445.6538,
+      "slope": 10.1836
+    },
+    {
+      "name": "Garhwal",
+      "avg_yield": 1079.3077,
+      "slope": 3.6745
+    },
+    {
+      "name": "Dehradun",
+      "avg_yield": 1937.3846,
+      "slope": 15.1528
+    },
+    {
+      "name": "Rajnandgaon",
+      "avg_yield": 1158.1923,
+      "slope": 15.547
+    },
+    {
+      "name": "Bhopal",
+      "avg_yield": 878.8462,
+      "slope": 39.92
+    },
+    {
+      "name": "Vizianagaram",
+      "avg_yield": 2169.8077,
+      "slope": 27.2961
+    },
+    {
+      "name": "Prakasam",
+      "avg_yield": 3131.0385,
+      "slope": 61.8335
+    },
+    {
+      "name": "Dharmapuri",
+      "avg_yield": 3661.7692,
+      "slope": 66.2865
+    },
+    {
+      "name": "Periyar (Erode)",
+      "avg_yield": 4347.8846,
+      "slope": 19.5217
+    },
+    {
+      "name": "Pudukkottai",
+      "avg_yield": 2703.8846,
+      "slope": 0.8421
+    },
+    {
+      "name": "Dindigul Anna",
+      "avg_yield": 4345.3462,
+      "slope": 38.4578
+    },
+    {
+      "name": "Virudhunagar / Kamarajar",
+      "avg_yield": 3133.3846,
+      "slope": 26.2988
+    },
+    {
+      "name": "Sivagangai / Pasumpon",
+      "avg_yield": 2084.1923,
+      "slope": -0.8687
+    },
+    {
+      "name": "Chidambanar / Toothukudi",
+      "avg_yield": 4244.5,
+      "slope": 14.5255
+    },
+    {
+      "name": "Jalna",
+      "avg_yield": 317.5385,
+      "slope": -33.9043
+    },
+    {
+      "name": "Latur",
+      "avg_yield": 511.4231,
+      "slope": -16.0961
+    },
+    {
+      "name": "Gadchiroli",
+      "avg_yield": 1150.3077,
+      "slope": 8.9655
+    },
+    {
+      "name": "Sindhudurg",
+      "avg_yield": 2571.3462,
+      "slope": 39.5347
+    },
+    {
+      "name": "Gandhinagar",
+      "avg_yield": 2358.0,
+      "slope": -1.9179
+    },
+    {
+      "name": "Dholpur",
+      "avg_yield": 1483.5769,
+      "slope": 43.5915
+    },
+    {
+      "name": "Rangareddy",
+      "avg_yield": 2427.6154,
+      "slope": 12.8506
+    },
+    {
+      "name": "Thiruvannamalai",
+      "avg_yield": 3188.6538,
+      "slope": 54.9097
+    },
+    {
+      "name": "Yamunanagar",
+      "avg_yield": 3268.5,
+      "slope": 34.866
+    },
+    {
+      "name": "Kaithal",
+      "avg_yield": 2747.5385,
+      "slope": 27.7477
+    },
+    {
+      "name": "Panipat",
+      "avg_yield": 2415.9615,
+      "slope": 13.2284
+    },
+    {
+      "name": "Rewari",
+      "avg_yield": 2298.4615,
+      "slope": 163.0318
+    },
+    {
+      "name": "Haridwar",
+      "avg_yield": 2157.8846,
+      "slope": -11.1381
+    },
+    {
+      "name": "Firozabad",
+      "avg_yield": 2239.0769,
+      "slope": 59.0968
+    },
+    {
+      "name": "Sonbhadra",
+      "avg_yield": 1438.0385,
+      "slope": 19.8991
+    },
+    {
+      "name": "Mau",
+      "avg_yield": 1773.8077,
+      "slope": 8.3244
+    },
+    {
+      "name": "Mahrajgani",
+      "avg_yield": 2353.8846,
+      "slope": 8.2027
+    },
+    {
+      "name": "Sidharthnagar",
+      "avg_yield": 1792.0,
+      "slope": 52.1217
+    },
+    {
+      "name": "Mahoba",
+      "avg_yield": 1030.0417,
+      "slope": 47.9552
+    },
+    {
+      "name": "Baran",
+      "avg_yield": 1811.9231,
+      "slope": 98.9388
+    },
+    {
+      "name": "Dausa",
+      "avg_yield": 453.5385,
+      "slope": -43.7709
+    },
+    {
+      "name": "Rajsamand",
+      "avg_yield": 1502.6154,
+      "slope": 37.5754
+    },
+    {
+      "name": "Hanumangarh",
+      "avg_yield": 2914.913,
+      "slope": 105.7895
+    },
+    {
+      "name": "Nagapattinam",
+      "avg_yield": 2407.625,
+      "slope": 0.0135
+    },
+    {
+      "name": "Villupuram",
+      "avg_yield": 3493.2727,
+      "slope": 39.2095
+    },
+    {
+      "name": "Mansa",
+      "avg_yield": 3741.1667,
+      "slope": 35.1217
+    },
+    {
+      "name": "Fatehgarh Sahib",
+      "avg_yield": 4041.5833,
+      "slope": 42.22
+    },
+    {
+      "name": "Kanpur Nagar",
+      "avg_yield": 2006.1538,
+      "slope": 29.4728
+    },
+    {
+      "name": "Kanpur Dehat",
+      "avg_yield": 2206.1538,
+      "slope": 32.9203
+    },
+    {
+      "name": "Bangalore (Rural)",
+      "avg_yield": 2761.1923,
+      "slope": 45.4492
+    },
+    {
+      "name": "Bangalore (Urban)",
+      "avg_yield": 2799.6154,
+      "slope": 45.5159
+    },
+    {
+      "name": "Cachar",
+      "avg_yield": 1867.8462,
+      "slope": 15.6294
+    },
+    {
+      "name": "Darrang",
+      "avg_yield": 1499.3846,
+      "slope": 59.7668
+    },
+    {
+      "name": "Dibrugarh",
+      "avg_yield": 1725.8846,
+      "slope": 10.6041
+    },
+    {
+      "name": "Goalpara",
+      "avg_yield": 1655.8462,
+      "slope": 40.7015
+    },
+    {
+      "name": "Kamrup",
+      "avg_yield": 1629.5,
+      "slope": 50.6629
+    },
+    {
+      "name": "Karbi Anglong",
+      "avg_yield": 1514.3846,
+      "slope": 12.8171
+    },
+    {
+      "name": "Lakhimpur",
+      "avg_yield": 1281.4615,
+      "slope": 23.3552
+    },
+    {
+      "name": "North Cachar Hil",
+      "avg_yield": 1748.0,
+      "slope": 24.3453
+    },
+    {
+      "name": "Nagaon",
+      "avg_yield": 1780.1538,
+      "slope": 19.1357
+    },
+    {
+      "name": "Sibsagar",
+      "avg_yield": 1955.1538,
+      "slope": 23.0017
+    },
+    {
+      "name": "Barpeta",
+      "avg_yield": 1260.5,
+      "slope": 48.7005
+    },
+    {
+      "name": "Dhubri",
+      "avg_yield": 1605.9231,
+      "slope": 78.3877
+    },
+    {
+      "name": "Golaghat",
+      "avg_yield": 1959.4231,
+      "slope": 24.6424
+    },
+    {
+      "name": "Jorhat",
+      "avg_yield": 1710.1923,
+      "slope": 13.4431
+    },
+    {
+      "name": "Karimganj",
+      "avg_yield": 1849.8077,
+      "slope": 23.3385
+    },
+    {
+      "name": "Kokrajhar",
+      "avg_yield": 1272.6538,
+      "slope": 41.0889
+    },
+    {
+      "name": "Nalbari",
+      "avg_yield": 1440.5385,
+      "slope": 47.3484
+    },
+    {
+      "name": "Sonitpur",
+      "avg_yield": 1514.9231,
+      "slope": 33.3668
+    },
+    {
+      "name": "Bilashpur",
+      "avg_yield": 1600.4231,
+      "slope": 50.814
+    },
+    {
+      "name": "Chamba",
+      "avg_yield": 1354.0385,
+      "slope": -3.1422
+    },
+    {
+      "name": "Kangra",
+      "avg_yield": 1411.6923,
+      "slope": 14.6496
+    },
+    {
+      "name": "Kinnaur",
+      "avg_yield": 1425.9231,
+      "slope": 13.5897
+    },
+    {
+      "name": "Kullu",
+      "avg_yield": 1365.3462,
+      "slope": -4.4386
+    },
+    {
+      "name": "Lahul & Spiti",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Solan",
+      "avg_yield": 1987.6538,
+      "slope": 55.9894
+    },
+    {
+      "name": "Mandi",
+      "avg_yield": 1310.5385,
+      "slope": 6.7227
+    },
+    {
+      "name": "Shimla",
+      "avg_yield": 1067.5769,
+      "slope": -11.986
+    },
+    {
+      "name": "Sirmaur",
+      "avg_yield": 1442.8846,
+      "slope": -9.7542
+    },
+    {
+      "name": "Una",
+      "avg_yield": 2061.8077,
+      "slope": 25.3856
+    },
+    {
+      "name": "Alappuzha",
+      "avg_yield": 2521.6154,
+      "slope": 32.2215
+    },
+    {
+      "name": "Kannur",
+      "avg_yield": 1827.6154,
+      "slope": 27.4858
+    },
+    {
+      "name": "Eranakulam",
+      "avg_yield": 1885.2692,
+      "slope": 22.4229
+    },
+    {
+      "name": "Idukki",
+      "avg_yield": 2404.4231,
+      "slope": 23.5839
+    },
+    {
+      "name": "Kottayam",
+      "avg_yield": 2554.1923,
+      "slope": 30.9419
+    },
+    {
+      "name": "Kozhikode",
+      "avg_yield": 1331.8846,
+      "slope": 10.3231
+    },
+    {
+      "name": "Malappuram",
+      "avg_yield": 2034.4615,
+      "slope": 44.8738
+    },
+    {
+      "name": "Palakkad",
+      "avg_yield": 2373.3077,
+      "slope": 22.7672
+    },
+    {
+      "name": "Kollam",
+      "avg_yield": 2088.3077,
+      "slope": 21.0988
+    },
+    {
+      "name": "Thrissur",
+      "avg_yield": 2321.4615,
+      "slope": 57.0407
+    },
+    {
+      "name": "Thiruvananthapuram",
+      "avg_yield": 2183.4615,
+      "slope": 40.2229
+    },
+    {
+      "name": "Kasaragod",
+      "avg_yield": 2058.4231,
+      "slope": 25.5894
+    },
+    {
+      "name": "Pathanamthitta",
+      "avg_yield": 2571.7692,
+      "slope": 23.6034
+    },
+    {
+      "name": "Wayanad",
+      "avg_yield": 2435.3462,
+      "slope": 22.2369
+    },
+    {
+      "name": "Balasore",
+      "avg_yield": 1476.6538,
+      "slope": 28.4578
+    },
+    {
+      "name": "Bolangir",
+      "avg_yield": 1428.1154,
+      "slope": 42.6834
+    },
+    {
+      "name": "Cuttack",
+      "avg_yield": 1613.3846,
+      "slope": 37.2506
+    },
+    {
+      "name": "Dhenkanal",
+      "avg_yield": 1563.6538,
+      "slope": 52.492
+    },
+    {
+      "name": "Ganjam",
+      "avg_yield": 1608.3846,
+      "slope": -2.3747
+    },
+    {
+      "name": "Kalahandi",
+      "avg_yield": 1300.2692,
+      "slope": 43.2072
+    },
+    {
+      "name": "Keonjhar",
+      "avg_yield": 1250.0769,
+      "slope": 30.3651
+    },
+    {
+      "name": "Koraput",
+      "avg_yield": 1560.6538,
+      "slope": 35.6783
+    },
+    {
+      "name": "Mayurbhanja",
+      "avg_yield": 1336.8462,
+      "slope": 20.6715
+    },
+    {
+      "name": "Phulbani ( Kandhamal )",
+      "avg_yield": 1295.1923,
+      "slope": 7.508
+    },
+    {
+      "name": "Puri",
+      "avg_yield": 1477.0769,
+      "slope": 24.5662
+    },
+    {
+      "name": "Sambalpur",
+      "avg_yield": 1715.0385,
+      "slope": 20.3518
+    },
+    {
+      "name": "Sundargarh",
+      "avg_yield": 1135.8077,
+      "slope": 38.9221
+    },
+    {
+      "name": "Bhadrak",
+      "avg_yield": 1680.4762,
+      "slope": 32.0688
+    },
+    {
+      "name": "Jagatsinghapur",
+      "avg_yield": 1698.4762,
+      "slope": 72.9948
+    },
+    {
+      "name": "Jajapur",
+      "avg_yield": 1307.7143,
+      "slope": 25.7403
+    },
+    {
+      "name": "Kendrapara",
+      "avg_yield": 1325.9048,
+      "slope": 29.9026
+    },
+    {
+      "name": "Angul",
+      "avg_yield": 1213.4286,
+      "slope": 31.5143
+    },
+    {
+      "name": "Gajapati",
+      "avg_yield": 1509.6667,
+      "slope": -9.4519
+    },
+    {
+      "name": "Nuapada",
+      "avg_yield": 1175.0952,
+      "slope": 52.8065
+    },
+    {
+      "name": "Malkangiri",
+      "avg_yield": 1293.5714,
+      "slope": 28.6442
+    },
+    {
+      "name": "Nawarangpur",
+      "avg_yield": 1467.2381,
+      "slope": 37.2623
+    },
+    {
+      "name": "Rayagada",
+      "avg_yield": 1638.381,
+      "slope": 39.5182
+    },
+    {
+      "name": "Khurda",
+      "avg_yield": 1475.619,
+      "slope": 26.3805
+    },
+    {
+      "name": "Nayagarh",
+      "avg_yield": 1371.3333,
+      "slope": 9.0532
+    },
+    {
+      "name": "Boudh",
+      "avg_yield": 1391.5714,
+      "slope": 43.1779
+    },
+    {
+      "name": "Bargarh",
+      "avg_yield": 2017.0952,
+      "slope": 49.6117
+    },
+    {
+      "name": "Deogarh",
+      "avg_yield": 1309.4762,
+      "slope": 57.8052
+    },
+    {
+      "name": "Jharsuguda",
+      "avg_yield": 1334.0952,
+      "slope": 8.8688
+    },
+    {
+      "name": "Sonepur",
+      "avg_yield": 2112.0476,
+      "slope": 86.1143
+    },
+    {
+      "name": "24-Paraganas South",
+      "avg_yield": 2040.8077,
+      "slope": 37.7856
+    },
+    {
+      "name": "24-Paraganas North",
+      "avg_yield": 2598.5769,
+      "slope": 26.5043
+    },
+    {
+      "name": "Nadia",
+      "avg_yield": 2733.1154,
+      "slope": 25.2838
+    },
+    {
+      "name": "Murshidabad",
+      "avg_yield": 2657.5769,
+      "slope": 36.7757
+    },
+    {
+      "name": "Burdwan",
+      "avg_yield": 2934.6923,
+      "slope": 23.9672
+    },
+    {
+      "name": "Birbhum",
+      "avg_yield": 2772.8846,
+      "slope": 42.2554
+    },
+    {
+      "name": "Bankura",
+      "avg_yield": 2584.5,
+      "slope": 26.6937
+    },
+    {
+      "name": "Hooghly",
+      "avg_yield": 2690.3846,
+      "slope": 29.5761
+    },
+    {
+      "name": "Jhargram",
+      "avg_yield": 2115.5,
+      "slope": 19.7597
+    },
+    {
+      "name": "Jalpaiguri",
+      "avg_yield": 1625.6538,
+      "slope": 52.6957
+    },
+    {
+      "name": "Darjeeling",
+      "avg_yield": 1713.9615,
+      "slope": 48.0578
+    },
+    {
+      "name": "Malda",
+      "avg_yield": 2658.4231,
+      "slope": 65.0369
+    },
+    {
+      "name": "Cooch Behar",
+      "avg_yield": 1776.7308,
+      "slope": 56.7121
+    },
+    {
+      "name": "Purulia",
+      "avg_yield": 1993.9231,
+      "slope": 40.1197
+    },
+    {
+      "name": "Uttar Dinajpur",
+      "avg_yield": 2327.2,
+      "slope": 40.5564
+    },
+    {
+      "name": "Dakshin Dinajpur",
+      "avg_yield": 2448.5,
+      "slope": 50.3519
+    },
+    {
+      "name": "East Midnapore / Purba Midnapore",
+      "avg_yield": 2247.1154,
+      "slope": 29.2215
+    },
+    {
+      "name": "West Midnapore",
+      "avg_yield": 2386.6923,
+      "slope": 38.932
+    },
+    {
+      "name": "Muzaffarpur",
+      "avg_yield": 1066.8462,
+      "slope": 10.4595
+    },
+    {
+      "name": "Darbhanga",
+      "avg_yield": 1040.2308,
+      "slope": 25.1569
+    },
+    {
+      "name": "Saharsa",
+      "avg_yield": 1245.9231,
+      "slope": 42.6434
+    },
+    {
+      "name": "Purnea",
+      "avg_yield": 1348.3462,
+      "slope": 38.5583
+    },
+    {
+      "name": "Saran",
+      "avg_yield": 1412.0,
+      "slope": 17.2465
+    },
+    {
+      "name": "Patna",
+      "avg_yield": 1957.9615,
+      "slope": 23.4711
+    },
+    {
+      "name": "Mungair",
+      "avg_yield": 1563.2308,
+      "slope": 52.5128
+    },
+    {
+      "name": "Bhagalpur",
+      "avg_yield": 1407.3846,
+      "slope": 45.9275
+    },
+    {
+      "name": "Santhal Paragana / Dumka",
+      "avg_yield": 1655.3333,
+      "slope": 26.595
+    },
+    {
+      "name": "Gaya",
+      "avg_yield": 1756.3077,
+      "slope": 43.9863
+    },
+    {
+      "name": "Hazaribagh",
+      "avg_yield": 1486.2083,
+      "slope": 47.2415
+    },
+    {
+      "name": "Dhanbad",
+      "avg_yield": 1643.5833,
+      "slope": 50.4168
+    },
+    {
+      "name": "Palamau",
+      "avg_yield": 1444.3043,
+      "slope": 47.9581
+    },
+    {
+      "name": "Ranchi",
+      "avg_yield": 1475.9167,
+      "slope": 45.4762
+    },
+    {
+      "name": "Nalanda",
+      "avg_yield": 1518.8462,
+      "slope": 39.7545
+    },
+    {
+      "name": "Nawada",
+      "avg_yield": 1656.5,
+      "slope": 50.388
+    },
+    {
+      "name": "Bhojpur",
+      "avg_yield": 2288.2308,
+      "slope": 46.5032
+    },
+    {
+      "name": "Rohtas",
+      "avg_yield": 2629.1154,
+      "slope": 79.7781
+    },
+    {
+      "name": "Siwan",
+      "avg_yield": 1242.2692,
+      "slope": 23.3986
+    },
+    {
+      "name": "Gopalganj",
+      "avg_yield": 1332.5769,
+      "slope": 7.305
+    },
+    {
+      "name": "Champaran (East)",
+      "avg_yield": 1192.4231,
+      "slope": -0.1569
+    },
+    {
+      "name": "Champaran (West)",
+      "avg_yield": 1681.1538,
+      "slope": 11.9747
+    },
+    {
+      "name": "Vaishali",
+      "avg_yield": 1158.7308,
+      "slope": 28.799
+    },
+    {
+      "name": "Sitamarhi",
+      "avg_yield": 1050.6923,
+      "slope": 14.7439
+    },
+    {
+      "name": "Madhubani",
+      "avg_yield": 1002.1923,
+      "slope": 10.0099
+    },
+    {
+      "name": "Samastipur",
+      "avg_yield": 1014.2308,
+      "slope": 26.6496
+    },
+    {
+      "name": "Begusarai",
+      "avg_yield": 945.7692,
+      "slope": 29.0803
+    },
+    {
+      "name": "Katihar",
+      "avg_yield": 1487.9615,
+      "slope": 48.8879
+    },
+    {
+      "name": "Giridih",
+      "avg_yield": 1409.75,
+      "slope": 34.0156
+    },
+    {
+      "name": "Jehanabad",
+      "avg_yield": 1904.0769,
+      "slope": 52.2202
+    },
+    {
+      "name": "Madhepura",
+      "avg_yield": 1317.0385,
+      "slope": 29.3029
+    },
+    {
+      "name": "Khagaria",
+      "avg_yield": 916.6154,
+      "slope": 33.1166
+    },
+    {
+      "name": "Godda",
+      "avg_yield": 1553.5,
+      "slope": 34.696
+    },
+    {
+      "name": "Sahebganj",
+      "avg_yield": 1459.4583,
+      "slope": 12.6749
+    },
+    {
+      "name": "Devghar / Deogarh",
+      "avg_yield": 1615.2917,
+      "slope": 21.3547
+    },
+    {
+      "name": "Lohardagga",
+      "avg_yield": 1459.2083,
+      "slope": 45.7443
+    },
+    {
+      "name": "Gumla",
+      "avg_yield": 1139.5417,
+      "slope": 20.2399
+    },
+    {
+      "name": "Singhbhum East",
+      "avg_yield": 1537.5417,
+      "slope": 44.1101
+    },
+    {
+      "name": "Singhbhum West",
+      "avg_yield": 1207.2083,
+      "slope": 12.5742
+    },
+    {
+      "name": "Araria",
+      "avg_yield": 1280.3077,
+      "slope": 43.1371
+    },
+    {
+      "name": "Kishanganj",
+      "avg_yield": 1231.3846,
+      "slope": 39.6472
+    },
+    {
+      "name": "Buxar",
+      "avg_yield": 2390.375,
+      "slope": 36.7648
+    },
+    {
+      "name": "Bhabhua / Kaimur",
+      "avg_yield": 2362.25,
+      "slope": 36.007
+    },
+    {
+      "name": "Banka",
+      "avg_yield": 1811.2083,
+      "slope": 90.6535
+    },
+    {
+      "name": "Jamui",
+      "avg_yield": 1250.2917,
+      "slope": 40.1143
+    },
+    {
+      "name": "Supaul",
+      "avg_yield": 1265.4167,
+      "slope": 36.5052
+    },
+    {
+      "name": "Chatra",
+      "avg_yield": 1419.3182,
+      "slope": 29.1073
+    },
+    {
+      "name": "Bokaro",
+      "avg_yield": 1423.2727,
+      "slope": 53.1444
+    },
+    {
+      "name": "Gadva / Garhwa",
+      "avg_yield": 1165.2727,
+      "slope": 6.7065
+    },
+    {
+      "name": "Khodrama / Koderma",
+      "avg_yield": 1509.9474,
+      "slope": -2.793
+    },
+    {
+      "name": "Lakhisarai",
+      "avg_yield": 1792.5238,
+      "slope": 97.0351
+    },
+    {
+      "name": "Pakund / Pakur",
+      "avg_yield": 1598.1579,
+      "slope": 31.7754
+    },
+    {
+      "name": "Sheikapura",
+      "avg_yield": 1894.9524,
+      "slope": 68.3468
+    },
+    {
+      "name": "Sheohar",
+      "avg_yield": 1183.1429,
+      "slope": -22.1857
+    },
+    {
+      "name": "Arwal",
+      "avg_yield": 1832.2,
+      "slope": 252.1857
+    },
+    {
+      "name": "Jamtara",
+      "avg_yield": 1618.1429,
+      "slope": -35.6249
+    },
+    {
+      "name": "Latehar",
+      "avg_yield": 1072.3125,
+      "slope": -32.0368
+    },
+    {
+      "name": "Sariakela / Kharsawan",
+      "avg_yield": 1603.8,
+      "slope": 7.1071
+    },
+    {
+      "name": "Simdega",
+      "avg_yield": 1540.6,
+      "slope": 5.9071
+    },
+    {
+      "name": "Chennai",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Anand",
+      "avg_yield": 2125.125,
+      "slope": 95.9971
+    },
+    {
+      "name": "Dahod",
+      "avg_yield": 674.9375,
+      "slope": 17.3515
+    },
+    {
+      "name": "Narmada",
+      "avg_yield": 748.625,
+      "slope": 16.4206
+    },
+    {
+      "name": "Navsari",
+      "avg_yield": 2495.3125,
+      "slope": 26.3926
+    },
+    {
+      "name": "Patan",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Porbandar",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Fatehabad",
+      "avg_yield": 3673.5789,
+      "slope": 63.5368
+    },
+    {
+      "name": "Jhajjar",
+      "avg_yield": 1862.6316,
+      "slope": 51.1123
+    },
+    {
+      "name": "Panchkula",
+      "avg_yield": 2931.1429,
+      "slope": 31.3481
+    },
+    {
+      "name": "Bagalkote",
+      "avg_yield": 2460.6111,
+      "slope": 99.289
+    },
+    {
+      "name": "Chamaraja Nagar",
+      "avg_yield": 3039.8333,
+      "slope": 27.3055
+    },
+    {
+      "name": "Davanagere",
+      "avg_yield": 3442.8889,
+      "slope": 17.1909
+    },
+    {
+      "name": "Gadag",
+      "avg_yield": 2576.2778,
+      "slope": 13.2126
+    },
+    {
+      "name": "Haveri",
+      "avg_yield": 1615.3889,
+      "slope": 36.2652
+    },
+    {
+      "name": "Koppal",
+      "avg_yield": 3530.8889,
+      "slope": -13.5005
+    },
+    {
+      "name": "Udupi",
+      "avg_yield": 2332.4444,
+      "slope": 40.0743
+    },
+    {
+      "name": "S.B.S Nagar",
+      "avg_yield": 3708.0952,
+      "slope": 46.6455
+    },
+    {
+      "name": "Shri Mukatsar Sahib",
+      "avg_yield": 3723.9048,
+      "slope": 38.5455
+    },
+    {
+      "name": "Moga",
+      "avg_yield": 4183.2857,
+      "slope": 59.0857
+    },
+    {
+      "name": "Karoli",
+      "avg_yield": 1076.2105,
+      "slope": 58.7737
+    },
+    {
+      "name": "Karur",
+      "avg_yield": 3697.2,
+      "slope": 73.412
+    },
+    {
+      "name": "Namakkal",
+      "avg_yield": 4227.85,
+      "slope": 32.8774
+    },
+    {
+      "name": "Perambular",
+      "avg_yield": 3227.95,
+      "slope": 98.4985
+    },
+    {
+      "name": "Theni",
+      "avg_yield": 4382.3,
+      "slope": 84.2496
+    },
+    {
+      "name": "Tiruvarur",
+      "avg_yield": 2568.1,
+      "slope": 82.6692
+    },
+    {
+      "name": "Thiruvallur",
+      "avg_yield": 3533.2,
+      "slope": 26.3113
+    },
+    {
+      "name": "Ambedkar Nagar",
+      "avg_yield": 2340.4286,
+      "slope": 36.739
+    },
+    {
+      "name": "Kushi Nagar / Padrauna",
+      "avg_yield": 2135.2083,
+      "slope": 50.8413
+    },
+    {
+      "name": "Udham Singh Nagar",
+      "avg_yield": 2907.55,
+      "slope": 15.291
+    },
+    {
+      "name": "Auraiya",
+      "avg_yield": 2676.4211,
+      "slope": 51.393
+    },
+    {
+      "name": "Bageshwar",
+      "avg_yield": 1299.3684,
+      "slope": 23.5544
+    },
+    {
+      "name": "Bagpat",
+      "avg_yield": 2597.5263,
+      "slope": 19.6193
+    },
+    {
+      "name": "Balrampur",
+      "avg_yield": 1817.7083,
+      "slope": 9.0666
+    },
+    {
+      "name": "Champavat",
+      "avg_yield": 1166.7895,
+      "slope": 28.1158
+    },
+    {
+      "name": "Chandauli",
+      "avg_yield": 2638.3158,
+      "slope": 6.1825
+    },
+    {
+      "name": "Chitrakoot",
+      "avg_yield": 948.2632,
+      "slope": -0.0982
+    },
+    {
+      "name": "G.B.Nagar",
+      "avg_yield": 2336.2105,
+      "slope": 19.186
+    },
+    {
+      "name": "Hathras",
+      "avg_yield": 1995.3158,
+      "slope": 9.2386
+    },
+    {
+      "name": "Amroha/J.B.Fulenagar",
+      "avg_yield": 2179.2105,
+      "slope": -8.8088
+    },
+    {
+      "name": "Kannauj",
+      "avg_yield": 2428.7895,
+      "slope": 44.1842
+    },
+    {
+      "name": "Kushambi",
+      "avg_yield": 1922.4737,
+      "slope": 27.6772
+    },
+    {
+      "name": "Rudraprayag",
+      "avg_yield": 1304.3684,
+      "slope": 29.8982
+    },
+    {
+      "name": "Santh Ravi Das Nagar / Bhadoi",
+      "avg_yield": 1836.9167,
+      "slope": 56.7539
+    },
+    {
+      "name": "Santh Kabir Nagar",
+      "avg_yield": 1871.1579,
+      "slope": 14.0175
+    },
+    {
+      "name": "Shravasti",
+      "avg_yield": 1826.4211,
+      "slope": 34.0544
+    },
+    {
+      "name": "Bongaigaon",
+      "avg_yield": 1227.6923,
+      "slope": 39.3285
+    },
+    {
+      "name": "Dhemaji",
+      "avg_yield": 1232.8462,
+      "slope": 14.5108
+    },
+    {
+      "name": "Hailakandi",
+      "avg_yield": 1975.6154,
+      "slope": 43.0844
+    },
+    {
+      "name": "Marigaon",
+      "avg_yield": 1717.9615,
+      "slope": 45.7104
+    },
+    {
+      "name": "Tinsukia",
+      "avg_yield": 1469.1538,
+      "slope": 17.3101
+    },
+    {
+      "name": "Dantewara",
+      "avg_yield": 1281.1111,
+      "slope": 41.6058
+    },
+    {
+      "name": "Dhamtari",
+      "avg_yield": 1790.5556,
+      "slope": 95.7503
+    },
+    {
+      "name": "Dindori",
+      "avg_yield": 855.0,
+      "slope": 58.6605
+    },
+    {
+      "name": "Harda",
+      "avg_yield": 1560.6667,
+      "slope": 93.1558
+    },
+    {
+      "name": "Janjgir",
+      "avg_yield": 1922.4444,
+      "slope": 131.4365
+    },
+    {
+      "name": "Barwani",
+      "avg_yield": 559.4444,
+      "slope": 45.9257
+    },
+    {
+      "name": "Katni",
+      "avg_yield": 884.2222,
+      "slope": 73.3643
+    },
+    {
+      "name": "Neemuch",
+      "avg_yield": 121.5556,
+      "slope": 4.6357
+    },
+    {
+      "name": "Sheopur Kalan",
+      "avg_yield": 2285.1667,
+      "slope": 129.1775
+    },
+    {
+      "name": "Umaria",
+      "avg_yield": 727.0,
+      "slope": 69.9257
+    },
+    {
+      "name": "Koriya",
+      "avg_yield": 1160.6111,
+      "slope": 20.3065
+    },
+    {
+      "name": "Jashpur",
+      "avg_yield": 1139.0556,
+      "slope": 30.9092
+    },
+    {
+      "name": "Korba",
+      "avg_yield": 1105.3889,
+      "slope": 22.0918
+    },
+    {
+      "name": "Kawardha",
+      "avg_yield": 1104.6667,
+      "slope": 31.678
+    },
+    {
+      "name": "Mahasmund",
+      "avg_yield": 1286.7778,
+      "slope": 52.8029
+    },
+    {
+      "name": "Kanker",
+      "avg_yield": 1586.9444,
+      "slope": 65.5304
+    },
+    {
+      "name": "Anuppur",
+      "avg_yield": 1032.0,
+      "slope": 97.1923
+    },
+    {
+      "name": "Gondia",
+      "avg_yield": 1376.0588,
+      "slope": 47.9853
+    },
+    {
+      "name": "Hingoli",
+      "avg_yield": 390.2353,
+      "slope": -33.8529
+    },
+    {
+      "name": "Nandurbar",
+      "avg_yield": 917.8333,
+      "slope": 26.1538
+    },
+    {
+      "name": "Washim",
+      "avg_yield": 482.5556,
+      "slope": -16.7492
+    },
+    {
+      "name": "Mumbai sub",
+      "avg_yield": 125.1429,
+      "slope": 27.3099
+    },
+    {
+      "name": "Ariyalur",
+      "avg_yield": 3959.25,
+      "slope": 312.9048
+    },
+    {
+      "name": "Krishnagiri",
+      "avg_yield": 3667.1538,
+      "slope": 238.7418
+    },
+    {
+      "name": "Ashoknagar",
+      "avg_yield": 1117.0,
+      "slope": 115.5495
+    },
+    {
+      "name": "Burhanpur",
+      "avg_yield": 940.3077,
+      "slope": -43.8516
+    },
+    {
+      "name": "Tapi",
+      "avg_yield": 2114.0,
+      "slope": 113.3
+    },
+    {
+      "name": "Mewat",
+      "avg_yield": 2843.6364,
+      "slope": 83.3
+    },
+    {
+      "name": "Palwal",
+      "avg_yield": 2652.0,
+      "slope": -51.4524
+    },
+    {
+      "name": "Ramanagaram",
+      "avg_yield": 2582.7778,
+      "slope": -55.7167
+    },
+    {
+      "name": "Chikkaballapur",
+      "avg_yield": 2830.5556,
+      "slope": -29.5333
+    },
+    {
+      "name": "Alirajpur",
+      "avg_yield": 670.75,
+      "slope": 87.8333
+    },
+    {
+      "name": "Singrauli",
+      "avg_yield": 1336.125,
+      "slope": 251.631
+    },
+    {
+      "name": "Taran Taran",
+      "avg_yield": 3051.0,
+      "slope": 7.5818
+    },
+    {
+      "name": "Barnala",
+      "avg_yield": 4618.6,
+      "slope": 0.7758
+    },
+    {
+      "name": "S.A.S Nagar",
+      "avg_yield": 3457.5455,
+      "slope": 29.5
+    },
+    {
+      "name": "Kasganj/Khansi Ram Nagar",
+      "avg_yield": 2252.5,
+      "slope": -0.5476
+    },
+    {
+      "name": "Narayanpur",
+      "avg_yield": 1289.1111,
+      "slope": -14.7833
+    },
+    {
+      "name": "Udalguri",
+      "avg_yield": 1355.4545,
+      "slope": 90.7455
+    },
+    {
+      "name": "Baksa",
+      "avg_yield": 1679.7273,
+      "slope": 88.4364
+    },
+    {
+      "name": "Chirang",
+      "avg_yield": 1336.7273,
+      "slope": 64.5273
+    },
+    {
+      "name": "Thiruppur",
+      "avg_yield": 4145.0,
+      "slope": 352.1905
+    },
+    {
+      "name": "Khunti",
+      "avg_yield": 1557.375,
+      "slope": 57.869
+    },
+    {
+      "name": "Ramgadh",
+      "avg_yield": 2897.75,
+      "slope": -336.2381
+    },
+    {
+      "name": "Yadagiri",
+      "avg_yield": 1985.6667,
+      "slope": 73.0286
+    },
+    {
+      "name": "Amethi/C.S.M. Nagar",
+      "avg_yield": 2123.0,
+      "slope": -92.3429
+    },
+    {
+      "name": "Mumbai City",
+      "avg_yield": 366.7,
+      "slope": -55.077
+    },
+    {
+      "name": "Kamrup (Metro)",
+      "avg_yield": 2112.3,
+      "slope": 70.7662
+    },
+    {
+      "name": "Pathankot",
+      "avg_yield": 2226.2,
+      "slope": 595.4
+    },
+    {
+      "name": "Sambhal",
+      "avg_yield": 2293.8,
+      "slope": -15.5
+    },
+    {
+      "name": "Shamli",
+      "avg_yield": 2557.0,
+      "slope": 22.2
+    },
+    {
+      "name": "Hapur",
+      "avg_yield": 2888.2,
+      "slope": 11.9
+    },
+    {
+      "name": "Balod",
+      "avg_yield": 1691.8,
+      "slope": -164.3
+    },
+    {
+      "name": "Baloda Bazar",
+      "avg_yield": 1476.0,
+      "slope": 37.8
+    },
+    {
+      "name": "Bemetra",
+      "avg_yield": 1617.6,
+      "slope": -63.8
+    },
+    {
+      "name": "Gariaband",
+      "avg_yield": 1326.8,
+      "slope": -65.9
+    },
+    {
+      "name": "Kondagaon",
+      "avg_yield": 1527.4,
+      "slope": 30.1
+    },
+    {
+      "name": "Mungli",
+      "avg_yield": 2034.0,
+      "slope": 18.8
+    },
+    {
+      "name": "Sukma",
+      "avg_yield": 1854.6,
+      "slope": 8.5
+    },
+    {
+      "name": "Surajpur",
+      "avg_yield": 1502.2,
+      "slope": 30.8
+    },
+    {
+      "name": "Fazilka",
+      "avg_yield": 2507.2,
+      "slope": 536.8
+    },
+    {
+      "name": "Aravalli",
+      "avg_yield": 736.5,
+      "slope": 855.0
+    },
+    {
+      "name": "Botad",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Chhota Udaipur",
+      "avg_yield": 1405.0,
+      "slope": 12.0
+    },
+    {
+      "name": "Devbhoomi Dwarka",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Gir Somnath",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Mahisagar",
+      "avg_yield": 1617.0,
+      "slope": 230.0
+    },
+    {
+      "name": "Morbi",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Agar Malwa",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    },
+    {
+      "name": "Palghar",
+      "avg_yield": 2413.5,
+      "slope": -207.0
+    },
+    {
+      "name": "Alipurduar",
+      "avg_yield": 0.0,
+      "slope": 0.0
+    }
+  ],
+  "stats": {
+    "count": 555,
+    "max_yield_district": "Barnala",
+    "max_yield": 4618.6,
+    "min_yield_district": "Agar Malwa",
+    "min_yield": 0.0,
+    "improving": 450,
+    "declining": 87,
+    "fastest_decline_district": "Ramgadh",
+    "fastest_decline_slope": -336.2381
+  }
+}
