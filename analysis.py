@@ -48,7 +48,7 @@ def _find_xls() -> Path:
         if p.exists():
             return p
         raise FileNotFoundError(f"--data path not found: {p}")
-    env_path = os.environ.get("ICRISAT_XLS")
+    env_path = r".\data\raw\ICRISAT_FILE.xls"
     if env_path:
         p = Path(env_path)
         if p.exists():
