@@ -1,0 +1,11 @@
+{
+  "districts_mapped": 555,
+  "highest_avg_yield": 4618.6,
+  "highest_district": "Barnala",
+  "lowest_avg_yield": 0.0,
+  "lowest_district": "Agar Malwa",
+  "improving_districts": 447,
+  "declining_districts": 85,
+  "fastest_declining": "Ramgadh",
+  "fastest_declining_slope": -336.23809523809524
+}

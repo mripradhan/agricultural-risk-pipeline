@@ -24,7 +24,7 @@ Adilabad,2018,Kharif     ,385.0,1222.0,3.17
 Adilabad,2019,Kharif     ,508.0,1846.0,3.63
 Agar Malwa,2013,Kharif     ,2.0,1.0,0.5
 Agar Malwa,2018,Kharif     ,286.0,286.0,1.0
-Agar Malwa,2019,Summer     ,98.0,,0.0
+Agar Malwa,2019,Summer     ,98.0,0.0,0.0
 Agra,1997,Kharif     ,935.0,2073.0,2.22
 Agra,1998,Kharif     ,1536.0,3478.0,2.26
 Agra,1999,Kharif     ,2142.0,3781.0,1.77
@@ -463,7 +463,7 @@ Aravalli,2016,Kharif     ,1487.0,3508.0,2.36
 Aravalli,2017,Kharif     ,1208.0,2930.0,2.43
 Aravalli,2018,Kharif     ,1625.0,3979.0,2.45
 Aravalli,2019,Kharif     ,1554.0,2507.0,1.61
-Ariyalur,2008,Kharif     ,24574.0,,0.0
+Ariyalur,2008,Kharif     ,24574.0,0.0,0.0
 Ariyalur,2009,Kharif     ,25978.0,80462.0,3.1
 Ariyalur,2010,Kharif     ,25211.0,97869.0,3.88
 Ariyalur,2011,Kharif     ,24097.0,97257.0,4.04
@@ -887,7 +887,7 @@ Banka,1999,Summer     ,65.0,121.0,1.86
 Banka,2000,Autumn     ,121873.0,138302.0,1.13
 Banka,2001,Autumn     ,102989.0,130687.0,1.27
 Banka,2002,Winter     ,103299.0,145882.0,1.41
-Banka,2003,Kharif     ,100564.0,150537.0,1.5
+Banka,2003,Winter     ,100564.0,150537.0,1.5
 Banka,2004,Winter     ,71841.0,97758.0,1.36
 Banka,2005,Winter     ,96920.0,133263.0,1.37
 Banka,2006,Winter     ,99429.0,258065.0,2.6
@@ -1544,7 +1544,7 @@ Bidar,2016,Kharif     ,525.0,629.0,1.2
 Bidar,2017,Kharif     ,1018.0,1898.0,1.86
 Bidar,2018,Kharif     ,617.0,444.0,0.72
 Bidar,2019,Kharif     ,743.0,832.0,1.12
-Bijapur,2006,Kharif     ,59305.0,,0.0
+Bijapur,2006,Kharif     ,59305.0,0.0,0.0
 Bijapur,2007,Kharif     ,61042.0,81497.0,1.34
 Bijapur,2008,Kharif     ,61144.0,42886.0,0.7
 Bijapur,2009,Kharif     ,58042.0,66370.0,1.14
@@ -2045,8 +2045,8 @@ Chatra,2016,Winter     ,20492.0,51271.0,2.5
 Chatra,2017,Kharif     ,36170.0,96453.0,2.67
 Chatra,2018,Kharif     ,31698.0,57056.0,1.8
 Chatra,2019,Kharif     ,29523.0,98902.0,3.35
-Chennai,2018,Autumn     ,85.0,,0.0
-Chennai,2019,Autumn     ,20.0,,0.0
+Chennai,2018,Summer     ,10.0,0.0,0.0
+Chennai,2019,Autumn     ,20.0,0.0,0.0
 Chhatarpur,1998,Kharif     ,18800.0,10100.0,0.54
 Chhatarpur,1999,Kharif     ,19505.0,20393.0,1.05
 Chhatarpur,2000,Kharif     ,18249.0,8362.0,0.46
@@ -4209,7 +4209,7 @@ Hoshiarpur,2016,Kharif     ,74000.0,287000.0,3.88
 Hoshiarpur,2017,Kharif     ,75000.0,292000.0,3.89
 Hoshiarpur,2018,Kharif     ,75000.0,279000.0,3.72
 Hoshiarpur,2019,Kharif     ,78000.0,312000.0,4.0
-Hyderabad,1997,Rabi       ,100.0,100.0,1.0
+Hyderabad,1997,Kharif     ,100.0,100.0,1.0
 Hyderabad,1998,Kharif     ,100.0,200.0,2.0
 Hyderabad,1999,Kharif     ,25.0,60.0,2.4
 Hyderabad,2000,Kharif     ,16.0,46.0,2.88
@@ -5763,7 +5763,7 @@ Kottayam,1998,Winter     ,7233.0,18048.0,2.5
 Kottayam,1999,Summer     ,6829.0,19320.0,2.83
 Kottayam,2000,Summer     ,7074.0,22409.0,3.17
 Kottayam,2001,Winter     ,7225.0,17601.0,2.44
-Kottayam,2002,Summer     ,4806.0,12176.0,2.53
+Kottayam,2002,Winter     ,4961.0,12176.0,2.45
 Kottayam,2003,Winter     ,5218.0,11394.0,2.18
 Kottayam,2004,Winter     ,7108.0,17228.0,2.42
 Kottayam,2005,Winter     ,6109.0,15823.0,2.59
@@ -6246,11 +6246,11 @@ Mahabubnagar,2016,Kharif     ,32691.0,92029.0,2.82
 Mahabubnagar,2017,Rabi       ,27990.0,82682.0,2.95
 Mahabubnagar,2018,Kharif     ,11792.0,28749.0,2.44
 Mahabubnagar,2019,Rabi       ,17109.0,56682.0,3.31
-Mahendragarh,2000,Kharif     ,1.0,,0.0
-Mahendragarh,2006,Kharif     ,1.0,,0.0
-Mahendragarh,2009,Kharif     ,33.0,,0.0
-Mahendragarh,2010,Kharif     ,25.0,,0.0
-Mahendragarh,2011,Kharif     ,39.0,,0.0
+Mahendragarh,2000,Kharif     ,1.0,0.0,0.0
+Mahendragarh,2006,Kharif     ,1.0,0.0,0.0
+Mahendragarh,2009,Kharif     ,33.0,0.0,0.0
+Mahendragarh,2010,Kharif     ,25.0,0.0,0.0
+Mahendragarh,2011,Kharif     ,39.0,0.0,0.0
 Mehsana,1997,Whole Year ,13800.0,27300.0,1.98
 Mehsana,1998,Kharif     ,11400.0,22200.0,1.95
 Mehsana,1999,Kharif     ,11700.0,17200.0,1.47
@@ -6445,7 +6445,7 @@ Mandsaur,2003,Kharif     ,14.0,8.0,0.57
 Mandsaur,2004,Kharif     ,7.0,4.0,0.57
 Mandsaur,2005,Kharif     ,6.0,2.0,0.33
 Mandsaur,2006,Kharif     ,2.0,1.0,0.5
-Mandsaur,2007,Kharif     ,1.0,,0.0
+Mandsaur,2007,Kharif     ,1.0,0.0,0.0
 Mandsaur,2017,Summer     ,520.0,1120.0,2.15
 Mandsaur,2018,Kharif     ,8.0,4.0,0.5
 Mandsaur,2019,Kharif     ,3.0,1.0,0.44
@@ -7140,7 +7140,7 @@ Nandurbar,2018,Kharif     ,26116.0,22519.0,0.86
 Nandurbar,2019,Kharif     ,26962.0,43273.0,1.6
 Narayanpur,2018,Kharif     ,19629.0,47856.0,2.44
 Narayanpur,2019,Kharif     ,33896.0,107416.0,3.17
-Narayanpur,2006,Kharif     ,23578.0,,0.0
+Narayanpur,2006,Kharif     ,23578.0,0.0,0.0
 Narayanpur,2007,Kharif     ,24164.0,35631.0,1.47
 Narayanpur,2008,Kharif     ,24165.0,37898.0,1.57
 Narayanpur,2009,Kharif     ,24099.0,26366.0,1.09
@@ -7563,7 +7563,7 @@ Parbhani,2010,Kharif     ,4000.0,1800.0,0.45
 Parbhani,2011,Kharif     ,1700.0,600.0,0.35
 Parbhani,2012,Kharif     ,1400.0,100.0,0.07
 Parbhani,2013,Kharif     ,700.0,300.0,0.43
-Parbhani,2014,Kharif     ,300.0,,0.0
+Parbhani,2014,Kharif     ,300.0,0.0,0.0
 Parbhani,2016,Kharif     ,20.0,4.0,0.2
 Parbhani,2018,Kharif     ,10.0,2.0,0.2
 Parbhani,2019,Kharif     ,10.0,1.0,0.1
@@ -9266,7 +9266,7 @@ Solapur,2005,Kharif     ,400.0,100.0,0.25
 Solapur,2006,Kharif     ,400.0,100.0,0.25
 Solapur,2007,Kharif     ,300.0,300.0,1.0
 Solapur,2008,Kharif     ,100.0,100.0,1.0
-Solapur,2009,Kharif     ,100.0,,0.0
+Solapur,2009,Kharif     ,100.0,0.0,0.0
 Solapur,2010,Kharif     ,700.0,200.0,0.29
 Solapur,2011,Kharif     ,700.0,200.0,0.29
 Solapur,2012,Kharif     ,400.0,100.0,0.25
@@ -9905,7 +9905,7 @@ Thirunelveli,2016,Kharif     ,29881.0,105193.0,3.52
 Thirunelveli,2017,Winter     ,36358.0,174046.0,4.79
 Thirunelveli,2018,Winter     ,37557.0,175160.0,4.66
 Thirunelveli,2019,Winter     ,43137.0,174433.0,4.04
-Thiruppur,2008,Kharif     ,11060.0,,0.0
+Thiruppur,2008,Kharif     ,11060.0,0.0,0.0
 Thiruppur,2009,Kharif     ,11958.0,50179.0,4.2
 Thiruppur,2010,Kharif     ,11797.0,46945.0,3.98
 Thiruppur,2011,Kharif     ,10612.0,48936.0,4.61
@@ -10089,7 +10089,7 @@ Ujjain,2003,Kharif     ,5.0,3.0,0.6
 Ujjain,2004,Kharif     ,19.0,10.0,0.53
 Ujjain,2005,Kharif     ,5.0,2.0,0.4
 Ujjain,2006,Kharif     ,1.0,1.0,1.0
-Ujjain,2007,Kharif     ,1.0,,0.0
+Ujjain,2007,Kharif     ,1.0,0.0,0.0
 Ujjain,2008,Kharif     ,2.0,1.0,0.5
 Ujjain,2017,Summer     ,200.0,380.0,1.9
 Ujjain,2018,Kharif     ,11.0,7.0,0.67
