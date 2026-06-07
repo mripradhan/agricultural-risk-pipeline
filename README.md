@@ -19,6 +19,30 @@ India's agricultural output sustains 1.4 billion people, yet the predictive mode
 
 ---
 
+## Screenshots
+
+**Analysis tab** — yield distribution histogram and year-wise trend for the selected district, with pre-computed EDA figures below.
+
+![Analysis tab](<outputs/figures/ui-screenshots/Screenshot 2026-06-07 203259.png>)
+
+**Maps tab** — interactive choropleth of average rice yield per district across 560 Indian districts (1990–2015).
+
+![Maps tab](<outputs/figures/ui-screenshots/Screenshot 2026-06-07 203352.png>)
+
+**SHAP tab** — global waterfall and dependence plot side by side.
+
+![SHAP tab overview](<outputs/figures/ui-screenshots/Screenshot 2026-06-07 203417.png>)
+
+**Live SHAP Waterfall** — per-district SHAP attribution decomposing the prediction into individual feature contributions.
+
+![Live SHAP waterfall](<outputs/figures/ui-screenshots/image.png>)
+
+**Feature Breakdown table** — top 15 features by SHAP impact, tagged as Controllable, Uncontrollable, or Structural.
+
+![Feature breakdown](<outputs/figures/ui-screenshots/image copy.png>)
+
+---
+
 ## Table of Contents
 
 1. [Problem Statement](#-problem-statement)

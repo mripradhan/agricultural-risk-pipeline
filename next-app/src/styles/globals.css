@@ -450,8 +450,9 @@ a { color: inherit; text-decoration: none; }
   padding: 80px 72px 80px 96px; border-right: 1px solid var(--rule);
 }
 .hero-right {
-  flex: 0 0 40%; display: flex; align-items: center; justify-content: center;
-  background: var(--bg-alt); padding: 60px 48px; overflow: hidden;
+  flex: 0 0 40%;
+  overflow: hidden;
+  position: relative;
 }
 .hero-overline {
   font-family: var(--sans);
@@ -484,7 +485,11 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-begin:hover::after { transform: scaleX(1); }
 .hero-begin:hover { gap: 14px; }
-.hero-illustration { width: 100%; max-width: 340px; }
+.hero-illustration {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
 
 @media (max-width: 900px) {
   .hero-right { display: none; }
